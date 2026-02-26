@@ -3,8 +3,8 @@
 Bienvenido/a 👋  
 Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por sesiones para que puedas **navegar por módulos**, buscar conceptos y reutilizar ejemplos como “recetario” de implementación.
 
-[Empezar por la Sesión 1.1](sesion1_1_arquitectura_rag_entorno_empresarial.md){ .md-button .md-button--primary }
-[Ver toda la estructura](#estructura-del-seminario){ .md-button }
+[Empezar por la Sesión 1.1](sesion1_1_arquitectura_rag_entorno_empresarial.md)
+[Ver toda la estructura](#estructura-del-seminario)
 
 ---
 
