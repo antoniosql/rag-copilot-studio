@@ -1,2 +1,2 @@
 # rag-copilot-studio
-Contenido para seminario de RAG utilizando Copilot Studio
+Contenido para seminario de RAG utilizando Copilot Studio. 
