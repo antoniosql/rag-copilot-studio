@@ -6,7 +6,7 @@
 
 ---
 
-## 0) Objetivos de aprendizaje del bloque
+## 1) Objetivos de aprendizaje del bloque
 
 Al finalizar este bloque, el participante será capaz de:
 

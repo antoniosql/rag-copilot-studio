@@ -6,7 +6,7 @@
 
 ---
 
-## 0) Objetivos de aprendizaje
+## 1) Objetivos de aprendizaje
 
 Al finalizar este bloque, el participante será capaz de:
 
@@ -21,35 +21,9 @@ Al finalizar este bloque, el participante será capaz de:
 3. Diseñar un **dataset de prueba (test set)** con cobertura realista (preguntas fáciles/difíciles, ambigüedad, fuera de alcance).
 4. Conectar síntomas observables (citaciones malas, respuestas incompletas, etc.) con causas probables (chunking, scope, permisos, etc.).
 
----
-
-## Plan completo de la sesión (5 horas)
-
-> Esta SESIÓN 4 está diseñada para **300 minutos** totales (incluye pausas cortas).  
-> Ajusta los descansos según el ritmo del grupo.
-
-| Bloque | Tema | Duración |
-|---|---|---:|
-| 4.1 | Evaluación de calidad (marco y métricas) | 75 min |
-| — | **Pausa** | 10 min |
-| 4.2 | Evaluación en Copilot Studio (hands-on) | 80 min |
-| — | **Pausa** | 10 min |
-| 4.3 | Seguridad y gobierno (DLP, labels, canales, prompt injection) | 75 min |
-| — | **Pausa** | 10 min |
-| 4.4 | Citaciones y trazabilidad (limitaciones + buenas prácticas) | 40 min |
-| — | Cierre + Q&A | 0–10 min |
 
 ---
-## 1) Agenda minuto a minuto
 
-- **00:00–00:08** — Por qué evaluar: “sin medición no hay mejora”.
-- **00:08–00:20** — Dos evaluaciones diferentes: retrieval vs respuesta (y por qué se confunden).
-- **00:20–00:35** — Métricas de recuperación: precision/recall@k, hit-rate, MRR (conceptual).
-- **00:35–00:55** — Métricas de respuesta: relevancia, groundedness, completitud, abstención.
-- **00:55–01:10** — Diseño de datasets de prueba: estructura, casos límite, mantenimiento.
-- **01:10–01:15** — Mini‑ejercicio: construir 10 test cases con etiquetas (y detectar riesgos).
-
----
 
 ## 2) La idea clave: evaluar **dos sistemas**, no uno
 

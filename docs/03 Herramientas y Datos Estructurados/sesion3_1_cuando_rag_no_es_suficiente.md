@@ -6,7 +6,7 @@
 
 ---
 
-## 0) Resultados de aprendizaje
+## 1) Resultados de aprendizaje
 
 Al finalizar este bloque, la persona participante podrá:
 
