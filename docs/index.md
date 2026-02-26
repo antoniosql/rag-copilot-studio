@@ -29,7 +29,7 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 ## Estructura del seminario
 
 
--   ## Sesión 1 — Fundamentos operativos de RAG  
+-   ### Sesión 1 — Fundamentos operativos de RAG  
     Arquitectura, indexación, embeddings y primera práctica en Copilot Studio.
 
     [Abrir Sesión 1 (recomendado)](sesion1_1_arquitectura_rag_entorno_empresarial.md)
