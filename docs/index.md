@@ -39,7 +39,7 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
     - [1.2 Proceso de indexación documental](sesion1_2_proceso_indexacion_documental.md)
     - [1.3 Embeddings y recuperación semántica](sesion1_3_embeddings_y_recuperacion_semantica.md)
 
--   ## Sesión 2 — Orígenes de conocimiento y calidad de recuperación  
+-   ### Sesión 2 — Orígenes de conocimiento y calidad de recuperación  
     Qué fuentes soporta Copilot Studio, cómo se “tratan” internamente y cómo mejorar la calidad de recuperación.
 
     [Abrir Sesión 2](sesion2_1_origenes_soportados_y_tratamiento.md)
@@ -51,7 +51,7 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
     - [2.3 Factores de calidad de la recuperación](sesion2_3_factores_calidad_recuperacion.md)
     
 
--   ## Sesión 3 — Arquitectura híbrida: RAG + herramientas + datos  
+-   ### Sesión 3 — Arquitectura híbrida: RAG + herramientas + datos  
     Cómo decidir cuándo usar RAG, cuándo usar herramientas (acciones) y cómo encaja el dato estructurado.
 
     [Abrir Sesión 3](sesion3_1_cuando_rag_no_es_suficiente.md)
@@ -62,7 +62,7 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
     - [3.2 Uso de herramientas en Copilot Studio](sesion3_2_uso_herramientas_copilot_studio.md)
     - [3.3 Datos estructurados y “agentes de datos”](sesion3_3_datos_estructurados_y_agente_datos.md)
 
--   ## Sesión 4 — Evaluación, seguridad y gobierno  
+-   ### Sesión 4 — Evaluación, seguridad y gobierno  
     Medición repetible, evaluación en Copilot Studio, controles de seguridad y trazabilidad.
 
     [Abrir Sesión 4](sesion4_1_evaluacion_calidad.md)
@@ -86,4 +86,4 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 
 ---
 
-
+# test
