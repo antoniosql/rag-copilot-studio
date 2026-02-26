@@ -50,7 +50,7 @@ Este repo de markdown asume que tienes disponible el pack del caso con estas car
 - `Datos_Estructurados/` (CSV)
 - `TestSets/` (CSV)
 
-Los tienes disponibles aquí [Recursos](https://github.com/antoniosql/rag-copilot-studio/tree/main/materiales)
+Los tienes disponibles aquí [Recursos](https://github.com/antoniosql/rag-copilot-studio/blob/main/materiales/materiales.zip)
 
 
 # FraSoHome — Índice y clasificación de documentos de conocimiento (Knowledge)
