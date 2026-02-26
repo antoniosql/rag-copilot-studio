@@ -1,5 +1,5 @@
 # Seminario: RAG y Copilot Studio
-
+![Banner del seminario](assets/images/banner.png)
 Bienvenido/a 👋  
 Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por sesiones para que puedas **navegar por módulos**, buscar conceptos y reutilizar ejemplos como “recetario” de implementación.
 
@@ -94,7 +94,4 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 
 ---
 
-!!! note "Sugerencia para añadir una imagen de portada (opcional)"
-    Si quieres un “banner” en la home, guarda una imagen en `docs/assets/images/banner.png` y añade esta línea debajo del título:
 
-    `![Banner del seminario](assets/images/banner.png)`
