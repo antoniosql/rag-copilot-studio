@@ -1,0 +1,2508 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../sesion2_1_origenes_soportados_y_tratamiento/">
+      
+      
+        <link rel="next" href="../sesion2_3_factores_calidad_recuperacion/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>SESIÓN 2.2 — Diferencias operativas clave - RAG con Copilot Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-22-diferencias-operativas-clave" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="RAG con Copilot Studio" class="md-header__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAG con Copilot Studio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SESIÓN 2.2 — Diferencias operativas clave
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Seminario: RAG y Copilot Studio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-tabs__link">
+          
+  
+  
+  01 Fundamentos RAG
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../sesion2_1_origenes_soportados_y_tratamiento/" class="md-tabs__link">
+          
+  
+  
+  02 Origenes Conocimiento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-tabs__link">
+          
+  
+  
+  03 Herramientas y Datos Estructurados
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-tabs__link">
+          
+  
+  
+  04 Evaluación, Seguridad y Gobierno
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../99%20Laboratorios/00%20indice/" class="md-tabs__link">
+          
+  
+  
+  99 Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="RAG con Copilot Studio" class="md-nav__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAG con Copilot Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seminario: RAG y Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fundamentos RAG
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 Fundamentos RAG
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.1 — Arquitectura RAG en entorno empresarial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_2_proceso_indexacion_documental/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.2 — Proceso de indexación documental
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_3_embeddings_y_recuperacion_semantica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.3 — Embeddings y recuperación semántica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Origenes Conocimiento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 Origenes Conocimiento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion2_1_origenes_soportados_y_tratamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.1 — Orígenes soportados y su tratamiento en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.2 — Diferencias operativas clave
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.2 — Diferencias operativas clave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos-de-aprendizaje-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Objetivos de aprendizaje del bloque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-definiciones-sin-ambiguedad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Definiciones (sin ambigüedad)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Definiciones (sin ambigüedad)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-knowledge-source-persistente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Knowledge source persistente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-documento-incorporado-al-agente-archivo-subido-como-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Documento incorporado al agente (archivo subido como conocimiento)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-archivo-subido-por-el-usuario-durante-la-conversacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Archivo subido por el usuario durante la conversación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-diferencias-operativas-clave-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Diferencias operativas clave (comparativa)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Diferencias operativas clave (comparativa)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-tabla-comparativa-de-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Tabla comparativa “de proyecto”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-profundizacion-por-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Profundización por tipo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-knowledge-source-persistente-agente-vs-nodo-y-como-se-busca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Knowledge source persistente: agente vs nodo y “cómo se busca”
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Knowledge source persistente: agente vs nodo y “cómo se busca”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-a-nivel-de-agente-fallback-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) A nivel de agente (fallback general)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-a-nivel-de-nodo-busqueda-intencionada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) A nivel de nodo (búsqueda intencionada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-documento-incorporado-al-agente-lo-que-no-suele-contarte-nadie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Documento incorporado al agente: lo que NO suele contarte nadie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Documento incorporado al agente: lo que NO suele contarte nadie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-se-comporta-en-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cómo se comporta en la práctica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuando-si-usar-archivo-subido-como-knowledge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuándo sí usar “archivo subido como knowledge”?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuando-evitarlo-casos-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuándo evitarlo (casos típicos)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-archivo-del-usuario-en-conversacion-habilitarlo-y-conectarlo-a-un-flujo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Archivo del usuario en conversación: habilitarlo y conectarlo a un flujo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Archivo del usuario en conversación: habilitarlo y conectarlo a un flujo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-habilitar-file-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 Habilitar file uploads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-pedir-un-archivo-al-usuario-y-capturarlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2 Pedir un archivo al usuario y capturarlo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-pasar-el-archivo-a-un-flujo-conector-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3 Pasar el archivo a un flujo / conector / tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-implicaciones-de-seguridad-y-exposicion-bloque-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Implicaciones de seguridad y exposición (bloque crítico)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Implicaciones de seguridad y exposición (bloque crítico)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-riesgos-por-tipo-de-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Riesgos por tipo de conocimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Riesgos por tipo de conocimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-archivo-subido-como-knowledge-maker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Archivo subido como knowledge (maker)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-sharepointonedrive-con-autenticacion-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) SharePoint/OneDrive con autenticación del usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-archivo-del-usuario-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C) Archivo del usuario (runtime)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-auditoria-citaciones-y-transcripciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Auditoría: citaciones y transcripciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-arbol-de-decision-para-elegir-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Árbol de decisión (para elegir rápido)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-miniejercicio-10-min-elige-el-tipo-correcto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) Mini‑ejercicio (10 min): elige el “tipo” correcto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7) Mini‑ejercicio (10 min): elige el “tipo” correcto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-1-manual-interno-todos-los-empleados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 1 — Manual interno (todos los empleados)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-2-politicas-rrhh-solo-managers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 2 — Políticas RRHH (solo managers)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-3-analizador-de-cvs-el-candidato-sube-su-cv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 3 — Analizador de CVs (el candidato sube su CV)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-lecturas-oficiales-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Lecturas oficiales recomendadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion2_3_factores_calidad_recuperacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.3 — Factores que influyen en la calidad del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Herramientas y Datos Estructurados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Herramientas y Datos Estructurados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.1 — Cuándo RAG no es suficiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_2_uso_herramientas_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.2 — Uso de herramientas en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_3_datos_estructurados_y_agente_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.3 — Datos estructurados y “agentes de datos”
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.1 — Evaluación de calidad en sistemas RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_2_evaluacion_en_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.2 — Evaluación en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_3_seguridad_y_gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_4_citaciones_y_trazabilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.4 — Citaciones y trazabilidad en RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Laboratorios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Laboratorios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/00%20indice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 2 — Base de conocimiento (RAG) en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB3_Prompting_Citaciones_y_Control_de_Fallback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 3 — Prompting, citaciones y seguridad (control de versionado + prompt injection)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB4_Dataverse_y_Datos_Estructurados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 4 — Dataverse: crear tablas e importar datos estructurados (CSV)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB5_Arquitectura_Hibrida_Tools_y_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 5 — Arquitectura híbrida: Tools (Dataverse) + RAG (documentos)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB6_Evaluacion_Seguridad_y_Gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 6 — Evaluación, seguridad y gobierno del asistente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos-de-aprendizaje-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Objetivos de aprendizaje del bloque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-definiciones-sin-ambiguedad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Definiciones (sin ambigüedad)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Definiciones (sin ambigüedad)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-knowledge-source-persistente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Knowledge source persistente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-documento-incorporado-al-agente-archivo-subido-como-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Documento incorporado al agente (archivo subido como conocimiento)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-archivo-subido-por-el-usuario-durante-la-conversacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Archivo subido por el usuario durante la conversación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-diferencias-operativas-clave-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Diferencias operativas clave (comparativa)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Diferencias operativas clave (comparativa)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-tabla-comparativa-de-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Tabla comparativa “de proyecto”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-profundizacion-por-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Profundización por tipo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-knowledge-source-persistente-agente-vs-nodo-y-como-se-busca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Knowledge source persistente: agente vs nodo y “cómo se busca”
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Knowledge source persistente: agente vs nodo y “cómo se busca”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-a-nivel-de-agente-fallback-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) A nivel de agente (fallback general)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-a-nivel-de-nodo-busqueda-intencionada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) A nivel de nodo (búsqueda intencionada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-documento-incorporado-al-agente-lo-que-no-suele-contarte-nadie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Documento incorporado al agente: lo que NO suele contarte nadie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Documento incorporado al agente: lo que NO suele contarte nadie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-se-comporta-en-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cómo se comporta en la práctica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuando-si-usar-archivo-subido-como-knowledge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuándo sí usar “archivo subido como knowledge”?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuando-evitarlo-casos-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuándo evitarlo (casos típicos)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-archivo-del-usuario-en-conversacion-habilitarlo-y-conectarlo-a-un-flujo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Archivo del usuario en conversación: habilitarlo y conectarlo a un flujo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Archivo del usuario en conversación: habilitarlo y conectarlo a un flujo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-habilitar-file-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 Habilitar file uploads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-pedir-un-archivo-al-usuario-y-capturarlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2 Pedir un archivo al usuario y capturarlo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-pasar-el-archivo-a-un-flujo-conector-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3 Pasar el archivo a un flujo / conector / tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-implicaciones-de-seguridad-y-exposicion-bloque-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Implicaciones de seguridad y exposición (bloque crítico)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Implicaciones de seguridad y exposición (bloque crítico)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-riesgos-por-tipo-de-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Riesgos por tipo de conocimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Riesgos por tipo de conocimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-archivo-subido-como-knowledge-maker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Archivo subido como knowledge (maker)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-sharepointonedrive-con-autenticacion-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) SharePoint/OneDrive con autenticación del usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-archivo-del-usuario-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C) Archivo del usuario (runtime)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-auditoria-citaciones-y-transcripciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Auditoría: citaciones y transcripciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-arbol-de-decision-para-elegir-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Árbol de decisión (para elegir rápido)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-miniejercicio-10-min-elige-el-tipo-correcto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) Mini‑ejercicio (10 min): elige el “tipo” correcto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7) Mini‑ejercicio (10 min): elige el “tipo” correcto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-1-manual-interno-todos-los-empleados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 1 — Manual interno (todos los empleados)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-2-politicas-rrhh-solo-managers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 2 — Políticas RRHH (solo managers)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-3-analizador-de-cvs-el-candidato-sube-su-cv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 3 — Analizador de CVs (el candidato sube su CV)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-lecturas-oficiales-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Lecturas oficiales recomendadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Seminario: RAG y Copilot Studio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../sesion2_1_origenes_soportados_y_tratamiento/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    02 Origenes Conocimiento
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sesion-22-diferencias-operativas-clave">SESIÓN 2.2 — Diferencias operativas clave<a class="headerlink" href="#sesion-22-diferencias-operativas-clave" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Sesión 2 (total: 5 horas)</strong> — <em>Orígenes de conocimiento y calidad de recuperación en Copilot Studio</em><br />
+<strong>Bloque 2.2</strong>: Diferencias operativas clave<br />
+<strong>Objetivo del bloque</strong>: que el alumnado distinga claramente <strong>qué significa cada “tipo” de conocimiento</strong> en Copilot Studio, cómo cambia el comportamiento del agente y cuáles son las <strong>implicaciones de seguridad y exposición</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="1-objetivos-de-aprendizaje-del-bloque">1) Objetivos de aprendizaje del bloque<a class="headerlink" href="#1-objetivos-de-aprendizaje-del-bloque" title="Permanent link">&para;</a></h2>
+<p>Al finalizar este bloque, el participante podrá:</p>
+<ol>
+<li>Diferenciar con precisión:</li>
+<li><strong>Knowledge source persistente</strong></li>
+<li><strong>Documento incorporado al agente</strong></li>
+<li><strong>Archivo subido por el usuario durante la conversación</strong></li>
+<li>Identificar para cada tipo:</li>
+<li>cómo se indexa,</li>
+<li>cómo se actualiza,</li>
+<li>si respeta permisos,</li>
+<li>qué riesgos de exposición existen,</li>
+<li>cómo se audita (citaciones / transcripciones / trazabilidad).</li>
+<li>Elegir el tipo correcto según 3 restricciones típicas: <strong>seguridad</strong>, <strong>frescura</strong> y <strong>control de cambios</strong>.</li>
+</ol>
+<hr />
+<h2 id="2-definiciones-sin-ambiguedad">2) Definiciones (sin ambigüedad)<a class="headerlink" href="#2-definiciones-sin-ambiguedad" title="Permanent link">&para;</a></h2>
+<h3 id="21-knowledge-source-persistente">2.1 Knowledge source persistente<a class="headerlink" href="#21-knowledge-source-persistente" title="Permanent link">&para;</a></h3>
+<p><strong>Definición</strong><br />
+Un <strong>knowledge source persistente</strong> es una fuente configurada en el agente (o en un nodo de generative answers) que el agente puede consultar en múltiples conversaciones, de forma continua.</p>
+<p>Ejemplos típicos:
+- SharePoint por URL
+- Public website por dominio
+- Dataverse (tablas)
+- Azure AI Search
+- Conectores para unstructured data</p>
+<p><strong>Dónde vive</strong>
+- A nivel de agente (Knowledge page) o
+- a nivel de topic (nodo Generative Answers).  </p>
+<p><strong>Prioridad</strong><br />
+Las fuentes configuradas en un nodo de generative answers <strong>tienen prioridad</strong> y las del agente actúan como <strong>fallback</strong>.<br />
+Fuentes:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-documents
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-generative-answers-sharepoint-onedrive
+</code></pre></div></p>
+<hr />
+<h3 id="22-documento-incorporado-al-agente-archivo-subido-como-conocimiento">2.2 Documento incorporado al agente (archivo subido como conocimiento)<a class="headerlink" href="#22-documento-incorporado-al-agente-archivo-subido-como-conocimiento" title="Permanent link">&para;</a></h3>
+<p><strong>Definición</strong><br />
+Es un archivo que el <em>maker</em> sube como knowledge source (a nivel de agente o topic), y que pasa a formar parte del “conocimiento” del agente.</p>
+<p><strong>Dónde vive</strong>
+- Se almacena en <strong>Dataverse</strong>, dentro del entorno del agente.<br />
+Fuentes:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-file-upload
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-documents
+</code></pre></div></p>
+<p><strong>Propiedad clave (y riesgo)</strong>
+- El contenido subido queda disponible para <strong>cualquier usuario</strong> que chatee con el agente, <strong>independientemente</strong> de permisos del archivo original.<br />
+Fuente (advertencia explícita):
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-documents
+</code></pre></div></p>
+<hr />
+<h3 id="23-archivo-subido-por-el-usuario-durante-la-conversacion">2.3 Archivo subido por el usuario durante la conversación<a class="headerlink" href="#23-archivo-subido-por-el-usuario-durante-la-conversacion" title="Permanent link">&para;</a></h3>
+<p><strong>Definición</strong><br />
+El usuario final adjunta un archivo en el chat (paperclip), y el agente puede:
+- <strong>analizarlo en la conversación</strong>, y/o
+- <strong>pasarlo</strong> a acciones, flujos, conectores o tools.</p>
+<p><strong>Activación</strong>
+- Se habilita en Settings → Generative AI → File uploads.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/image-input-analysis
+</code></pre></div></p>
+<p><strong>Acceso en el runtime</strong>
+- El archivo suele estar disponible como parte de <code>System.Activity.Attachments</code> y puede solicitarse con un <strong>Question node</strong> identificando tipo <strong>File</strong>.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/pass-files-to-connectors
+</code></pre></div></p>
+<blockquote>
+<p>Importante: esto no convierte automáticamente el archivo del usuario en “knowledge source persistente”. Es una <strong>entrada</strong> para esa conversación (o para un flujo), no una base de conocimiento corporativa.</p>
+</blockquote>
+<hr />
+<h2 id="3-diferencias-operativas-clave-comparativa">3) Diferencias operativas clave (comparativa)<a class="headerlink" href="#3-diferencias-operativas-clave-comparativa" title="Permanent link">&para;</a></h2>
+<h3 id="31-tabla-comparativa-de-proyecto">3.1 Tabla comparativa “de proyecto”<a class="headerlink" href="#31-tabla-comparativa-de-proyecto" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>Knowledge source persistente (conector/URL/AIS)</th>
+<th>Documento incorporado (archivo subido como knowledge)</th>
+<th>Archivo del usuario en conversación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Persistencia</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No (por defecto)</td>
+</tr>
+<tr>
+<td>¿Quién lo aporta?</td>
+<td>Maker/admin</td>
+<td>Maker/admin</td>
+<td>Usuario final</td>
+</tr>
+<tr>
+<td>Indexación</td>
+<td>Depende del origen (GraphSearch / Dataverse index / Azure AI Search)</td>
+<td>Dataverse (chunking + embeddings)</td>
+<td>Análisis ad hoc + paso a acciones</td>
+</tr>
+<tr>
+<td>Actualización</td>
+<td>Depende del origen (puede ser dinámica)</td>
+<td><strong>Estática</strong>: re‑subir para reflejar cambios</td>
+<td>“Snapshot” del momento</td>
+</tr>
+<tr>
+<td>Permisos por usuario</td>
+<td>A menudo <strong>sí</strong> (Entra ID / Dataverse perms)</td>
+<td><strong>No</strong>: expone a todos los usuarios del agente</td>
+<td>Depende del flujo; el usuario comparte el archivo explícitamente</td>
+</tr>
+<tr>
+<td>Riesgo principal</td>
+<td>Scope y ruido</td>
+<td><strong>Exposición</strong> de contenido sensible</td>
+<td>Exfiltración / tratamiento de datos personales</td>
+</tr>
+<tr>
+<td>Citaciones</td>
+<td>Sí (si el origen las soporta)</td>
+<td>Sí</td>
+<td>Depende (no siempre hay citación, puede ser resumen)</td>
+</tr>
+<tr>
+<td>Auditoría / transcripción</td>
+<td>Variable</td>
+<td>Variable</td>
+<td>Variable</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-profundizacion-por-tipo">4) Profundización por tipo<a class="headerlink" href="#4-profundizacion-por-tipo" title="Permanent link">&para;</a></h2>
+<h2 id="41-knowledge-source-persistente-agente-vs-nodo-y-como-se-busca">4.1 Knowledge source persistente: agente vs nodo y “cómo se busca”<a class="headerlink" href="#41-knowledge-source-persistente-agente-vs-nodo-y-como-se-busca" title="Permanent link">&para;</a></h2>
+<h3 id="a-a-nivel-de-agente-fallback-general">A) A nivel de agente (fallback general)<a class="headerlink" href="#a-a-nivel-de-agente-fallback-general" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Útil para “cobertura base” o FAQ general.</li>
+<li>Riesgo: scope demasiado amplio (recupera de donde no toca).</li>
+</ul>
+<h3 id="b-a-nivel-de-nodo-busqueda-intencionada">B) A nivel de nodo (búsqueda intencionada)<a class="headerlink" href="#b-a-nivel-de-nodo-busqueda-intencionada" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Útil para un caso de uso concreto (“políticas RRHH España”).</li>
+<li>Mejora calidad: menos fuentes → mejor precision/groundedness.</li>
+<li>La documentación recomienda especificar fuentes concretas en nodos para “best results”.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-boost-node
+</code></pre></div></li>
+</ul>
+<p><strong>Consejo didáctico</strong><br />
+Para entrenar criterio en el alumnado:
+- “Si el conocimiento es multi‑dominio, evita agent‑level mega‑fuentes y usa nodos por intención”.</p>
+<hr />
+<h2 id="42-documento-incorporado-al-agente-lo-que-no-suele-contarte-nadie">4.2 Documento incorporado al agente: lo que NO suele contarte nadie<a class="headerlink" href="#42-documento-incorporado-al-agente-lo-que-no-suele-contarte-nadie" title="Permanent link">&para;</a></h2>
+<h3 id="como-se-comporta-en-la-practica">Cómo se comporta en la práctica<a class="headerlink" href="#como-se-comporta-en-la-practica" title="Permanent link">&para;</a></h3>
+<p>1) <strong>Copia estática</strong>
+- Si el documento original cambia, el agente no lo sabe, salvo que:
+  - lo vuelvas a subir, o
+  - uses OneDrive/SharePoint unstructured con sync (ver 2.1).<br />
+Fuente comparativa OneDrive vs upload:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-unstructured-data
+</code></pre></div></p>
+<p>2) <strong>No sobreescribe</strong>
+- Subir el mismo nombre crea una copia nueva (duplicados).<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-documents
+</code></pre></div></p>
+<p>3) <strong>Forma parte de la solución</strong>
+- Exportar/importar la solución del agente incluye los archivos.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-documents
+</code></pre></div></p>
+<p>4) <strong>Exposición a todos</strong>
+- Advertencia oficial: el contenido es accesible a cualquiera que chatee con el agente, sin respetar permisos del archivo original.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-documents
+</code></pre></div></p>
+<h3 id="cuando-si-usar-archivo-subido-como-knowledge">¿Cuándo sí usar “archivo subido como knowledge”?<a class="headerlink" href="#cuando-si-usar-archivo-subido-como-knowledge" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prototipo rápido con documentación “safe”.</li>
+<li>Demos o formación.</li>
+<li>Conocimiento que es <strong>público interno</strong> (misma visibilidad para todo el mundo).</li>
+<li>“Snapshot” aprobado (normativa congelada para auditoría).</li>
+</ul>
+<h3 id="cuando-evitarlo-casos-tipicos">¿Cuándo evitarlo (casos típicos)?<a class="headerlink" href="#cuando-evitarlo-casos-tipicos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Documentos por departamento con permisos.</li>
+<li>Información sensible (legal, finanzas, nóminas).</li>
+<li>Documentos que cambian cada semana (procedimientos vivos).</li>
+</ul>
+<hr />
+<h2 id="43-archivo-del-usuario-en-conversacion-habilitarlo-y-conectarlo-a-un-flujo">4.3 Archivo del usuario en conversación: habilitarlo y conectarlo a un flujo<a class="headerlink" href="#43-archivo-del-usuario-en-conversacion-habilitarlo-y-conectarlo-a-un-flujo" title="Permanent link">&para;</a></h2>
+<h3 id="431-habilitar-file-uploads">4.3.1 Habilitar file uploads<a class="headerlink" href="#431-habilitar-file-uploads" title="Permanent link">&para;</a></h3>
+<p>En Settings → Generative AI:
+- activar <strong>File uploads</strong>
+- ajustar content moderation</p>
+<p>Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/image-input-analysis
+</code></pre></div></p>
+<p><strong>Limitaciones relevantes (y sorpresa habitual)</strong>
+La documentación de “allow file input” indica límites específicos para archivos “analizados en conversación”:
+- tipos soportados (CSV/PDF/TXT/imagenes…)
+- límites de tamaño y páginas (p. ej. PDFs &lt; 40 páginas, TXT/CSV pequeños)
+- y nota: si el agente se publica en canal SharePoint, los usuarios <strong>no pueden subir archivos</strong>.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/image-input-analysis
+</code></pre></div></p>
+<blockquote>
+<p>Ojo: estos límites son distintos de los límites de “knowledge files” (512 MB) y pueden confundir al equipo.</p>
+</blockquote>
+<hr />
+<h3 id="432-pedir-un-archivo-al-usuario-y-capturarlo">4.3.2 Pedir un archivo al usuario y capturarlo<a class="headerlink" href="#432-pedir-un-archivo-al-usuario-y-capturarlo" title="Permanent link">&para;</a></h3>
+<p><strong>Patrón 1 — Question node</strong>
+- En un topic, añade un Question node.
+- En Identify → selecciona <strong>File</strong>.
+- Activa “Include file metadata”.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/pass-files-to-connectors
+</code></pre></div></p>
+<p><strong>Patrón 2 — Leer attachment si ya venía adjunto</strong>
+- Usa <code>First(System.Activity.Attachments)</code> para detectar archivos ya adjuntos (por ejemplo en Teams).<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/pass-files-to-connectors
+</code></pre></div></p>
+<hr />
+<h3 id="433-pasar-el-archivo-a-un-flujo-conector-tool">4.3.3 Pasar el archivo a un flujo / conector / tool<a class="headerlink" href="#433-pasar-el-archivo-a-un-flujo-conector-tool" title="Permanent link">&para;</a></h3>
+<p>La guía oficial da fórmulas Power Fx para pasar contenido:
+- <code>{ contentBytes: Topic.userReceipt.Content, name: Topic.userReceipt.Name }</code>
+- o directamente desde <code>First(System.Activity.Attachments)</code>.</p>
+<p>Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/pass-files-to-connectors
+</code></pre></div></p>
+<p><strong>Implicación práctica</strong>
+Esto habilita casos como:
+- “Sube el PDF y te extraigo fechas clave”
+- “Adjunta la factura y creo un ticket con el adjunto”
+- “Adjunta el contrato y clasifico cláusulas”</p>
+<hr />
+<h2 id="5-implicaciones-de-seguridad-y-exposicion-bloque-critico">5) Implicaciones de seguridad y exposición (bloque crítico)<a class="headerlink" href="#5-implicaciones-de-seguridad-y-exposicion-bloque-critico" title="Permanent link">&para;</a></h2>
+<h3 id="51-riesgos-por-tipo-de-conocimiento">5.1 Riesgos por tipo de conocimiento<a class="headerlink" href="#51-riesgos-por-tipo-de-conocimiento" title="Permanent link">&para;</a></h3>
+<h4 id="a-archivo-subido-como-knowledge-maker">A) Archivo subido como knowledge (maker)<a class="headerlink" href="#a-archivo-subido-como-knowledge-maker" title="Permanent link">&para;</a></h4>
+<p>Riesgo principal:
+- <strong>exposición involuntaria</strong> (todo usuario que chatea con el agente puede “ver” el contenido recuperado).<br />
+Fuente: advertencia explícita en <em>nlu-documents</em>.  </p>
+<p>Mitigación:
+- No subir contenido sensible.
+- Segmentar agentes por audiencia (p. ej., HR‑Agent vs Everyone‑Agent).
+- Preferir SharePoint/OneDrive con permisos.</p>
+<h4 id="b-sharepointonedrive-con-autenticacion-del-usuario">B) SharePoint/OneDrive con autenticación del usuario<a class="headerlink" href="#b-sharepointonedrive-con-autenticacion-del-usuario" title="Permanent link">&para;</a></h4>
+<p>Riesgo principal:
+- configuración de autenticación incorrecta,
+- scope demasiado amplio (sitio raíz “/sites” sin delimitar),
+- dependencia de límites del producto (páginas clásicas, SPFx, etc.).<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-quotas
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-generative-answers-sharepoint-onedrive
+</code></pre></div></p>
+<p>Mitigación:
+- delimitar URLs específicas,
+- validar con usuarios de roles distintos,
+- usar nodos por intención para limitar fuentes.</p>
+<h4 id="c-archivo-del-usuario-runtime">C) Archivo del usuario (runtime)<a class="headerlink" href="#c-archivo-del-usuario-runtime" title="Permanent link">&para;</a></h4>
+<p>Riesgo principal:
+- tratamiento de PII/contratos/secretos industriales,
+- pasar el archivo a sistemas downstream sin control (Power Automate, conectores),
+- retención/logging en herramientas externas.</p>
+<p>Mitigación:
+- establecer reglas de uso (banner/aviso),
+- DLP + policies de entorno,
+- moderación,
+- “data minimization”: extraer solo lo necesario.</p>
+<hr />
+<h3 id="52-auditoria-citaciones-y-transcripciones">5.2 Auditoría: citaciones y transcripciones<a class="headerlink" href="#52-auditoria-citaciones-y-transcripciones" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SharePoint: respuestas usando SharePoint como knowledge source no aparecen en conversation transcripts.<br />
+Fuente:
+<div class="highlight"><pre><span></span><code>https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-generative-answers-sharepoint-onedrive
+</code></pre></div></li>
+</ul>
+<p><strong>Pregunta para el equipo de gobierno</strong>
+- Si no hay transcripción, ¿cómo auditamos decisiones?<br />
+Opciones típicas:
+- logging alternativo, feedback, o “respuestas con citación + click tracking”.</p>
+<hr />
+<h2 id="6-arbol-de-decision-para-elegir-rapido">6) Árbol de decisión (para elegir rápido)<a class="headerlink" href="#6-arbol-de-decision-para-elegir-rapido" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>flowchart TD
+  A[¿El contenido es sensible / con permisos por usuario?] --&gt;|Sí| B[Usa SharePoint/OneDrive con Entra ID o Dataverse perms]
+  A --&gt;|No| C[¿Necesitas que el contenido cambie a menudo?]
+  C --&gt;|Sí| D[Usa SharePoint/OneDrive (sync) o Azure AI Search con pipeline]
+  C --&gt;|No| E[¿Quieres snapshot incluido en la solución?]
+  E --&gt;|Sí| F[Sube archivos como knowledge (Dataverse)]
+  E --&gt;|No| G[Usa web corporativa o mezcla de fuentes]
+  B --&gt; H[Limita scope con nodos por intención]
+  D --&gt; H
+  F --&gt; I[No subir contenido sensible]
+  G --&gt; H
+</code></pre></div>
+<hr />
+<h2 id="7-miniejercicio-10-min-elige-el-tipo-correcto">7) Mini‑ejercicio (10 min): elige el “tipo” correcto<a class="headerlink" href="#7-miniejercicio-10-min-elige-el-tipo-correcto" title="Permanent link">&para;</a></h2>
+<p>Para cada caso, responde:
+- ¿qué tipo de conocimiento usarías?
+- ¿por qué?
+- ¿qué riesgo te preocupa más?
+- ¿cómo lo mitigas?</p>
+<h3 id="caso-1-manual-interno-todos-los-empleados">Caso 1 — Manual interno (todos los empleados)<a class="headerlink" href="#caso-1-manual-interno-todos-los-empleados" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1 PDF estable, sin cambios frecuentes.</li>
+</ul>
+<h3 id="caso-2-politicas-rrhh-solo-managers">Caso 2 — Políticas RRHH (solo managers)<a class="headerlink" href="#caso-2-politicas-rrhh-solo-managers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20 documentos, con versiones y permisos.</li>
+</ul>
+<h3 id="caso-3-analizador-de-cvs-el-candidato-sube-su-cv">Caso 3 — Analizador de CVs (el candidato sube su CV)<a class="headerlink" href="#caso-3-analizador-de-cvs-el-candidato-sube-su-cv" title="Permanent link">&para;</a></h3>
+<ul>
+<li>archivo del usuario, hay PII, y se necesita extraer datos.</li>
+</ul>
+<hr />
+<h2 id="8-lecturas-oficiales-recomendadas">8) Lecturas oficiales recomendadas<a class="headerlink" href="#8-lecturas-oficiales-recomendadas" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Knowledge sources summary:
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
+
+Upload files as knowledge source:
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-file-upload
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-documents
+
+Allow file input from users:
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/image-input-analysis
+
+Pass files to flows/connectors/tools:
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/pass-files-to-connectors
+
+SharePoint generative answers behavior:
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-generative-answers-sharepoint-onedrive
+
+Limits (SharePoint constraints, quotas):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-quotas
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.path", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

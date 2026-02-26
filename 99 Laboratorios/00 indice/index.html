@@ -1,0 +1,1703 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_4_citaciones_y_trazabilidad/">
+      
+      
+        <link rel="next" href="../LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse) - RAG con Copilot Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#caso-frasohome-laboratorios-copilot-studio-rag-dataverse" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="RAG con Copilot Studio" class="md-header__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAG con Copilot Studio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Seminario: RAG y Copilot Studio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-tabs__link">
+          
+  
+  
+  01 Fundamentos RAG
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-tabs__link">
+          
+  
+  
+  02 Origenes Conocimiento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-tabs__link">
+          
+  
+  
+  03 Herramientas y Datos Estructurados
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-tabs__link">
+          
+  
+  
+  04 Evaluación, Seguridad y Gobierno
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  99 Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="RAG con Copilot Studio" class="md-nav__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAG con Copilot Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seminario: RAG y Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fundamentos RAG
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 Fundamentos RAG
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.1 — Arquitectura RAG en entorno empresarial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_2_proceso_indexacion_documental/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.2 — Proceso de indexación documental
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_3_embeddings_y_recuperacion_semantica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.3 — Embeddings y recuperación semántica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Origenes Conocimiento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 Origenes Conocimiento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.1 — Orígenes soportados y su tratamiento en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_2_diferencias_operativas_clave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.2 — Diferencias operativas clave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_3_factores_calidad_recuperacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.3 — Factores que influyen en la calidad del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Herramientas y Datos Estructurados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Herramientas y Datos Estructurados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.1 — Cuándo RAG no es suficiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_2_uso_herramientas_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.2 — Uso de herramientas en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_3_datos_estructurados_y_agente_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.3 — Datos estructurados y “agentes de datos”
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.1 — Evaluación de calidad en sistemas RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_2_evaluacion_en_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.2 — Evaluación en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_3_seguridad_y_gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_4_citaciones_y_trazabilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.4 — Citaciones y trazabilidad en RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Laboratorios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Laboratorios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-del-caso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción del caso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-construiras-al-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué construirás al final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indice-de-laboratorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice de laboratorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-recomendada-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura recomendada (referencia)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 2 — Base de conocimiento (RAG) en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LAB3_Prompting_Citaciones_y_Control_de_Fallback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 3 — Prompting, citaciones y seguridad (control de versionado + prompt injection)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LAB4_Dataverse_y_Datos_Estructurados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 4 — Dataverse: crear tablas e importar datos estructurados (CSV)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LAB5_Arquitectura_Hibrida_Tools_y_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 5 — Arquitectura híbrida: Tools (Dataverse) + RAG (documentos)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LAB6_Evaluacion_Seguridad_y_Gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 6 — Evaluación, seguridad y gobierno del asistente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-del-caso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción del caso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-construiras-al-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué construirás al final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indice-de-laboratorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice de laboratorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-recomendada-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura recomendada (referencia)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Seminario: RAG y Copilot Studio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    99 Laboratorios
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="caso-frasohome-laboratorios-copilot-studio-rag-dataverse">Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)<a class="headerlink" href="#caso-frasohome-laboratorios-copilot-studio-rag-dataverse" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion-del-caso">Introducción del caso<a class="headerlink" href="#introduccion-del-caso" title="Permanent link">&para;</a></h2>
+<p><strong>FraSoHome</strong> es una cadena ficticia B2C de muebles y decoración con operación omnicanal (tiendas físicas, e-commerce y fidelización en CRM). En los últimos meses, la compañía sufre:</p>
+<ul>
+<li><strong>Fragmentación de la información</strong> (CRM, POS, e-commerce, ERP) y dificultad para “unir” datos.</li>
+<li><strong>Problemas de calidad y consistencia</strong> (duplicados, claves que no encajan, formatos heterogéneos, nulos y anomalías).</li>
+<li><strong>Dependencia del equipo de datos</strong> para responder preguntas recurrentes y falta de consistencia en definiciones y procedimientos.</li>
+</ul>
+<p>El objetivo del taller es construir un <strong>asistente en Copilot Studio</strong> con enfoque <strong>híbrido</strong>:</p>
+<ul>
+<li><strong>RAG (documentos)</strong> para preguntas “documentales” (políticas, procedimientos, definiciones de KPI).</li>
+<li><strong>Tools / acciones (Dataverse)</strong> para preguntas “métricas” (ventas, devoluciones, stock) que requieren cálculos o consulta a datos estructurados.</li>
+<li><strong>Respuesta con evidencia</strong>: citaciones para lo documental y trazabilidad de la consulta para lo métrico.</li>
+</ul>
+<blockquote>
+<p>Nota: Estos laboratorios empiezan en <strong>LAB 2</strong> .</p>
+</blockquote>
+<h2 id="que-construiras-al-final">Qué construirás al final<a class="headerlink" href="#que-construiras-al-final" title="Permanent link">&para;</a></h2>
+<p>Un agente capaz de:</p>
+<ol>
+<li>Responder preguntas internas con <strong>citaciones</strong> desde conocimiento controlado.</li>
+<li>Consultar datos en Dataverse mediante <strong>Tools</strong> y devolver métricas con supuestos claros.</li>
+<li>Integrar “métrica + definición/política” en respuestas mixtas.</li>
+<li>Pasar una evaluación básica con test sets y aplicar controles mínimos de seguridad.</li>
+</ol>
+<h2 id="indice-de-laboratorios">Índice de laboratorios<a class="headerlink" href="#indice-de-laboratorios" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><a href="../LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/">LAB 2 — Base de conocimiento (RAG) en Copilot Studio</a><br />
+  Carga de documentos vigentes, activación de citaciones y prueba controlada de conflicto de versiones.</p>
+</li>
+<li>
+<p><a href="../LAB3_Prompting_Citaciones_y_Control_de_Fallback/">LAB 3 — Prompting, citaciones y seguridad (control de versionado + prompt injection)</a><br />
+  Instrucciones del agente, prompt modification, formato, abstención y pruebas de seguridad.</p>
+</li>
+<li>
+<p><a href="../LAB4_Dataverse_y_Datos_Estructurados/">LAB 4 — Dataverse: crear tablas e importar datos estructurados (CSV)</a><br />
+  Creación de tablas y carga de CSV para ventas, devoluciones y stock.</p>
+</li>
+<li>
+<p><a href="../LAB5_Arquitectura_Hibrida_Tools_y_RAG/">LAB 5 — Arquitectura híbrida: Tools (Dataverse) + RAG (documentos)</a><br />
+  Añadir Tools de Dataverse (solo lectura), crear topic métrico y responder preguntas con datos + definiciones.</p>
+</li>
+<li>
+<p><a href="../LAB6_Evaluacion_Seguridad_y_Gobierno/">LAB 6 — Evaluación, seguridad y gobierno del asistente</a><br />
+  Ejecutar evaluaciones con test sets, diagnosticar fallos y aplicar acciones correctivas.</p>
+</li>
+</ul>
+<h2 id="estructura-recomendada-referencia">Estructura recomendada (referencia)<a class="headerlink" href="#estructura-recomendada-referencia" title="Permanent link">&para;</a></h2>
+<p>Este repo de markdown asume que tienes disponible el pack del caso con estas carpetas:</p>
+<ul>
+<li><code>Documentos_Knowledge_Clasificados/</code> (políticas, KPI, operaciones, catálogo, CRM, gobierno, tests)</li>
+<li><code>Datos_Estructurados/</code> (CSV)</li>
+<li><code>TestSets/</code> (CSV)</li>
+</ul>
+<p>Los tienes disponibles aquí <a href="https://github.com/antoniosql/rag-copilot-studio/blob/main/materiales/materiales.zip">Recursos</a></p>
+<h1 id="frasohome-indice-y-clasificacion-de-documentos-de-conocimiento-knowledge">FraSoHome — Índice y clasificación de documentos de conocimiento (Knowledge)<a class="headerlink" href="#frasohome-indice-y-clasificacion-de-documentos-de-conocimiento-knowledge" title="Permanent link">&para;</a></h1>
+<p>Este documento clasifica los archivos de la carpeta <code>Documentos_Knowledge</code>
+y sugiere cómo usarlos en los laboratorios y en un escenario de producción.</p>
+<hr />
+<h2 id="ultima-actualizacion">📅 Última actualización<a class="headerlink" href="#ultima-actualizacion" title="Permanent link">&para;</a></h2>
+<p>2026-02-26</p>
+<hr />
+<h2 id="uso">🎯 Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h2>
+<p>Referencia rápida para:</p>
+<ul>
+<li>Seleccionar fuentes de conocimiento (RAG)</li>
+<li>Evitar mezclar versiones</li>
+<li>No subir documentos de prueba en producción</li>
+</ul>
+<hr />
+<h1 id="1-clasificacion-por-dominio">1️⃣ Clasificación por dominio<a class="headerlink" href="#1-clasificacion-por-dominio" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="01_politicas">01_Politicas<a class="headerlink" href="#01_politicas" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>FS-KB-01_Politica_Devoluciones_v1.3_Vigente.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  Política oficial de devoluciones (plazos, excepciones, reembolsos).<br />
+  ✔ Usar en respuestas a empleados / atención.</p>
+</li>
+<li>
+<p><strong>FS-KB-02_Politica_Devoluciones_v1.2_Obsoleta.docx</strong><br />
+  Estado: <strong>OBSOLETA</strong> (solo formación).<br />
+  Versión anterior para practicar control de versiones.<br />
+  ❌ No usar en producción.</p>
+</li>
+</ul>
+<hr />
+<h2 id="02_kpi_y_datos">02_KPI_y_Datos<a class="headerlink" href="#02_kpi_y_datos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>FS-KB-03_Diccionario_KPI_Reglas_Calculo_v1.0.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  Definiciones y fórmulas KPI:</li>
+<li>Ventas netas</li>
+<li>Stock disponible</li>
+<li>Tasa de devolución</li>
+<li>Etc.</li>
+</ul>
+<hr />
+<h2 id="03_operaciones">03_Operaciones<a class="headerlink" href="#03_operaciones" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>FS-KB-04_Manual_Tienda_Caja_y_Pagos_Mixtos_v2.1.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  Procedimientos de tienda:</li>
+<li>Cierre de caja</li>
+<li>Pagos mixtos</li>
+<li>
+<p>Incidencias</p>
+</li>
+<li>
+<p><strong>FS-KB-05_Guia_Conciliacion_Pagos_Ecommerce_v1.4.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  Conciliación e-commerce:</p>
+</li>
+<li>Cobros</li>
+<li>Reembolsos</li>
+<li>
+<p>Cupones</p>
+</li>
+<li>
+<p><strong>FS-KB-09_FAQ_Operaciones_y_Atencion_v1.0.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  FAQ operacional:</p>
+</li>
+<li>Respuestas rápidas</li>
+<li>Pautas</li>
+</ul>
+<hr />
+<h2 id="04_catalogo">04_Catalogo<a class="headerlink" href="#04_catalogo" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>FS-KB-06_Taxonomia_Catalogo_y_Reglas_SKU_v1.2.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  Reglas de SKU, categorías y naming para catálogo.</li>
+</ul>
+<hr />
+<h2 id="05_crm">05_CRM<a class="headerlink" href="#05_crm" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>FS-KB-07_Guia_Fidelizacion_CRM_v1.1.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  Programa de fidelización:</li>
+<li>Tiers</li>
+<li>Beneficios</li>
+<li>Condiciones</li>
+</ul>
+<hr />
+<h2 id="06_gobierno_y_seguridad">06_Gobierno_y_Seguridad<a class="headerlink" href="#06_gobierno_y_seguridad" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>FS-KB-08_Politica_Datos_y_Permisos_Asistente_v1.0.docx</strong><br />
+  Estado: <strong>VIGENTE</strong><br />
+  Política de datos:</li>
+<li>Qué puede / no puede responder</li>
+<li>PII</li>
+<li>Permisos</li>
+</ul>
+<hr />
+<h2 id="07_test_security">07_Test_Security<a class="headerlink" href="#07_test_security" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>FS-KB-10_Documento_Prueba_Prompt_Injection_NO_PROD.docx</strong><br />
+  Estado: <strong>NO_PROD</strong> (solo pruebas).<br />
+  Texto simulado de prompt injection para red teaming.<br />
+  ⚠ Debe retirarse tras el LAB 3.</li>
+</ul>
+<hr />
+<h1 id="2-recomendacion-de-carga-por-laboratorio">2️⃣ Recomendación de carga por laboratorio<a class="headerlink" href="#2-recomendacion-de-carga-por-laboratorio" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="lab-2-base-rag">LAB 2 (Base RAG)<a class="headerlink" href="#lab-2-base-rag" title="Permanent link">&para;</a></h2>
+<p>Subir SOLO documentos <strong>VIGENTES</strong>:</p>
+<ul>
+<li>FS-KB-01</li>
+<li>FS-KB-03</li>
+<li>FS-KB-04</li>
+<li>FS-KB-05</li>
+<li>FS-KB-06</li>
+<li>FS-KB-07</li>
+<li>FS-KB-08</li>
+<li>FS-KB-09</li>
+</ul>
+<p>Al final, subir <strong>FS-KB-02</strong> para provocar conflicto controlado.</p>
+<hr />
+<h2 id="lab-3-prompting-y-seguridad">LAB 3 (Prompting y seguridad)<a class="headerlink" href="#lab-3-prompting-y-seguridad" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Subir temporalmente <strong>FS-KB-10</strong> para pruebas de inyección.</li>
+<li>Luego retirarlo.</li>
+<li>Mantener FS-KB-02 para probar regla de versionado.</li>
+</ul>
+<hr />
+<h2 id="lab-4-dataverse">LAB 4 (Dataverse)<a class="headerlink" href="#lab-4-dataverse" title="Permanent link">&para;</a></h2>
+<p>Sin cambios en documentos.<br />
+Se preparan tablas y CSV.</p>
+<hr />
+<h2 id="lab-5-hibrido">LAB 5 (Híbrido)<a class="headerlink" href="#lab-5-hibrido" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Asegurar FS-KB-03 para definiciones KPI.</li>
+<li>Mantener FS-KB-08 por reglas de permisos al usar datos.</li>
+</ul>
+<hr />
+<h2 id="lab-6-evaluacion-y-gobierno">LAB 6 (Evaluación y gobierno)<a class="headerlink" href="#lab-6-evaluacion-y-gobierno" title="Permanent link">&para;</a></h2>
+<p>Preparar "modo producción":</p>
+<ul>
+<li>Retirar FS-KB-02</li>
+<li>Retirar FS-KB-10</li>
+<li>Dejar solo documentos <strong>VIGENTES</strong></li>
+</ul>
+<hr />
+<h1 id="3-regla-practica-de-versionado">3️⃣ Regla práctica de versionado<a class="headerlink" href="#3-regla-practica-de-versionado" title="Permanent link">&para;</a></h1>
+<p>Mantener patrón en nombres de archivo: FS-KB-XX_<Tema>vX.Y<Estado>.docx </p>
+<p>Estados recomendados:</p>
+<ul>
+<li>Vigente</li>
+<li>Obsoleta</li>
+<li>NO_PROD</li>
+</ul>
+<hr />
+<h2 id="regla-operativa">📌 Regla operativa<a class="headerlink" href="#regla-operativa" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Cuando se publique una nueva versión:</li>
+<li>Subir la nueva</li>
+<li>
+<p>Retirar la anterior (o moverla a repositorio histórico fuera de Knowledge)</p>
+</li>
+<li>
+<p>Si por formación conviven versiones:</p>
+</li>
+<li>El agente debe incluir una regla de priorización:<ul>
+<li>Documento <strong>Vigente</strong></li>
+<li>Versión mayor</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.path", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

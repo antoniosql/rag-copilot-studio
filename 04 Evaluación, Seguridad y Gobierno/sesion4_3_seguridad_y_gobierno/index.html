@@ -1,0 +1,2455 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../sesion4_2_evaluacion_en_copilot_studio/">
+      
+      
+        <link rel="next" href="../sesion4_4_citaciones_y_trazabilidad/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Sesión 4.3 — Seguridad y control empresarial en un sistema RAG - RAG con Copilot Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-43-seguridad-y-control-empresarial-en-un-sistema-rag" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="RAG con Copilot Studio" class="md-header__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAG con Copilot Studio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Seminario: RAG y Copilot Studio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-tabs__link">
+          
+  
+  
+  01 Fundamentos RAG
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-tabs__link">
+          
+  
+  
+  02 Origenes Conocimiento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-tabs__link">
+          
+  
+  
+  03 Herramientas y Datos Estructurados
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../sesion4_1_evaluacion_calidad/" class="md-tabs__link">
+          
+  
+  
+  04 Evaluación, Seguridad y Gobierno
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../99%20Laboratorios/00%20indice/" class="md-tabs__link">
+          
+  
+  
+  99 Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="RAG con Copilot Studio" class="md-nav__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAG con Copilot Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seminario: RAG y Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fundamentos RAG
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 Fundamentos RAG
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.1 — Arquitectura RAG en entorno empresarial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_2_proceso_indexacion_documental/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.2 — Proceso de indexación documental
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_3_embeddings_y_recuperacion_semantica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.3 — Embeddings y recuperación semántica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Origenes Conocimiento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 Origenes Conocimiento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.1 — Orígenes soportados y su tratamiento en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_2_diferencias_operativas_clave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.2 — Diferencias operativas clave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_3_factores_calidad_recuperacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.3 — Factores que influyen en la calidad del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Herramientas y Datos Estructurados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Herramientas y Datos Estructurados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.1 — Cuándo RAG no es suficiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_2_uso_herramientas_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.2 — Uso de herramientas en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_3_datos_estructurados_y_agente_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.3 — Datos estructurados y “agentes de datos”
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion4_1_evaluacion_calidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.1 — Evaluación de calidad en sistemas RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion4_2_evaluacion_en_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.2 — Evaluación en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Objetivos de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-riesgo-top-1-en-rag-empresarial-exposicion-de-contenido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) El riesgo “top 1” en RAG empresarial: exposición de contenido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) El riesgo “top 1” en RAG empresarial: exposición de contenido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-tres-superficies-de-riesgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Tres superficies de riesgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-permisos-por-usuario-y-control-de-acceso-a-origenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Permisos por usuario y control de acceso a orígenes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Permisos por usuario y control de acceso a orígenes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-principio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Principio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-que-implica-esto-en-copilot-studio-modelo-mental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Qué implica esto en Copilot Studio (modelo mental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-diseno-recomendado-de-permisos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Diseño recomendado de permisos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-loss-prevention-dlp-data-policies-para-agentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Data Loss Prevention (DLP) / Data policies para agentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Data Loss Prevention (DLP) / Data policies para agentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-que-es-dlp-en-power-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 ¿Qué es DLP en Power Platform?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-controles-habituales-y-como-usarlos-ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Controles habituales y cómo usarlos (ejemplos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Controles habituales y cómo usarlos (ejemplos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-requerir-autenticacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Requerir autenticación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-bloquear-knowledge-sources-especificos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) Bloquear knowledge sources específicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-bloquear-http-o-conectores-como-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C) Bloquear HTTP o conectores como herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-bloquear-canales-de-publicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D) Bloquear canales de publicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-advertencia-operativa-evaluacion-automatica-y-dlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Advertencia operativa: evaluación automática y DLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sensitivity-labels-microsoft-purview-y-senales-para-el-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Sensitivity labels (Microsoft Purview) y señales para el usuario
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Sensitivity labels (Microsoft Purview) y señales para el usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-que-aportan-las-etiquetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Qué aportan las etiquetas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-limitacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Limitación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-microsoft-purview-auditoria-dlp-y-cumplimiento-en-interacciones-con-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Microsoft Purview: auditoría, DLP y cumplimiento en interacciones con IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-mitigacion-basica-frente-a-prompt-injection-sin-paranoia-con-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) Mitigación básica frente a prompt injection (sin paranoia, con método)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7) Mitigación básica frente a prompt injection (sin paranoia, con método)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-que-es-prompt-injection-definicion-operativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Qué es prompt injection (definición operativa)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-que-protecciones-existen-a-alto-nivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Qué protecciones existen (a alto nivel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-buenas-practicas-de-mitigacion-lo-que-si-debes-ensenar-y-aplicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Buenas prácticas de mitigación (lo que sí debes enseñar y aplicar)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 Buenas prácticas de mitigación (lo que sí debes enseñar y aplicar)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-zero-trust-para-el-contexto-recuperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Zero Trust para el contexto recuperado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-permisos-minimo-privilegio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) Permisos + mínimo privilegio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-allowlisting-de-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C) Allow‑listing de herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-confirmaciones-para-acciones-sensibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D) Confirmaciones para acciones “sensibles”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-dlp-como-capa-de-contencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E) DLP como capa de contención
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-moderacion-y-filtros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F) Moderación y filtros
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-checklist-de-seguridad-para-usar-en-proyectos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Checklist de seguridad (para usar en proyectos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8) Checklist de seguridad (para usar en proyectos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-checklist-tecnicoorganizativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Checklist técnico‑organizativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-arquitectura-de-referencia-simplificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9) Arquitectura de referencia (simplificada)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-lectura-opcional-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10) Lectura opcional (oficial)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion4_4_citaciones_y_trazabilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.4 — Citaciones y trazabilidad en RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Laboratorios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Laboratorios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/00%20indice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 2 — Base de conocimiento (RAG) en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB3_Prompting_Citaciones_y_Control_de_Fallback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 3 — Prompting, citaciones y seguridad (control de versionado + prompt injection)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB4_Dataverse_y_Datos_Estructurados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 4 — Dataverse: crear tablas e importar datos estructurados (CSV)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB5_Arquitectura_Hibrida_Tools_y_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 5 — Arquitectura híbrida: Tools (Dataverse) + RAG (documentos)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB6_Evaluacion_Seguridad_y_Gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 6 — Evaluación, seguridad y gobierno del asistente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Objetivos de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-riesgo-top-1-en-rag-empresarial-exposicion-de-contenido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) El riesgo “top 1” en RAG empresarial: exposición de contenido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) El riesgo “top 1” en RAG empresarial: exposición de contenido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-tres-superficies-de-riesgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Tres superficies de riesgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-permisos-por-usuario-y-control-de-acceso-a-origenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Permisos por usuario y control de acceso a orígenes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Permisos por usuario y control de acceso a orígenes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-principio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Principio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-que-implica-esto-en-copilot-studio-modelo-mental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Qué implica esto en Copilot Studio (modelo mental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-diseno-recomendado-de-permisos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Diseño recomendado de permisos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-loss-prevention-dlp-data-policies-para-agentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Data Loss Prevention (DLP) / Data policies para agentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Data Loss Prevention (DLP) / Data policies para agentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-que-es-dlp-en-power-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 ¿Qué es DLP en Power Platform?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-controles-habituales-y-como-usarlos-ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Controles habituales y cómo usarlos (ejemplos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Controles habituales y cómo usarlos (ejemplos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-requerir-autenticacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Requerir autenticación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-bloquear-knowledge-sources-especificos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) Bloquear knowledge sources específicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-bloquear-http-o-conectores-como-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C) Bloquear HTTP o conectores como herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-bloquear-canales-de-publicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D) Bloquear canales de publicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-advertencia-operativa-evaluacion-automatica-y-dlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Advertencia operativa: evaluación automática y DLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sensitivity-labels-microsoft-purview-y-senales-para-el-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Sensitivity labels (Microsoft Purview) y señales para el usuario
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Sensitivity labels (Microsoft Purview) y señales para el usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-que-aportan-las-etiquetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Qué aportan las etiquetas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-limitacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Limitación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-microsoft-purview-auditoria-dlp-y-cumplimiento-en-interacciones-con-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Microsoft Purview: auditoría, DLP y cumplimiento en interacciones con IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-mitigacion-basica-frente-a-prompt-injection-sin-paranoia-con-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) Mitigación básica frente a prompt injection (sin paranoia, con método)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7) Mitigación básica frente a prompt injection (sin paranoia, con método)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-que-es-prompt-injection-definicion-operativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Qué es prompt injection (definición operativa)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-que-protecciones-existen-a-alto-nivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Qué protecciones existen (a alto nivel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-buenas-practicas-de-mitigacion-lo-que-si-debes-ensenar-y-aplicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Buenas prácticas de mitigación (lo que sí debes enseñar y aplicar)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 Buenas prácticas de mitigación (lo que sí debes enseñar y aplicar)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-zero-trust-para-el-contexto-recuperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Zero Trust para el contexto recuperado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-permisos-minimo-privilegio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) Permisos + mínimo privilegio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-allowlisting-de-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C) Allow‑listing de herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-confirmaciones-para-acciones-sensibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D) Confirmaciones para acciones “sensibles”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-dlp-como-capa-de-contencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E) DLP como capa de contención
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-moderacion-y-filtros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F) Moderación y filtros
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-checklist-de-seguridad-para-usar-en-proyectos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Checklist de seguridad (para usar en proyectos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8) Checklist de seguridad (para usar en proyectos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-checklist-tecnicoorganizativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Checklist técnico‑organizativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-arquitectura-de-referencia-simplificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9) Arquitectura de referencia (simplificada)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-lectura-opcional-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10) Lectura opcional (oficial)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Seminario: RAG y Copilot Studio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../sesion4_1_evaluacion_calidad/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    04 Evaluación, Seguridad y Gobierno
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sesion-43-seguridad-y-control-empresarial-en-un-sistema-rag">Sesión 4.3 — Seguridad y control empresarial en un sistema RAG<a class="headerlink" href="#sesion-43-seguridad-y-control-empresarial-en-un-sistema-rag" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Módulo</strong>: SESIÓN 4 — <em>Evaluación, seguridad y gobierno de un sistema RAG</em><br />
+<strong>Bloque</strong>: 4.3 Seguridad y control empresarial  </p>
+<p><strong>Propósito</strong>: que el alumnado identifique los <strong>riesgos reales</strong> de un RAG corporativo y aplique controles prácticos: permisos, DLP, labels, canales, y mitigación básica ante prompt injection.</p>
+</blockquote>
+<hr />
+<h2 id="1-objetivos-de-aprendizaje">1) Objetivos de aprendizaje<a class="headerlink" href="#1-objetivos-de-aprendizaje" title="Permanent link">&para;</a></h2>
+<p>Al finalizar este bloque, el participante será capaz de:</p>
+<ol>
+<li>Explicar la diferencia entre:</li>
+<li>seguridad del <strong>modelo</strong>,</li>
+<li>seguridad del <strong>conocimiento</strong>,</li>
+<li>seguridad de <strong>herramientas/acciones</strong> (tools).</li>
+<li>Diseñar un RAG que respete:</li>
+<li><strong>permisos por usuario</strong> (Entra ID / ACL),</li>
+<li><strong>alcance</strong> y “need‑to‑know”.</li>
+<li>Aplicar gobierno mediante:</li>
+<li><strong>DLP / data policies</strong> (Power Platform),</li>
+<li>restricciones de conectores,</li>
+<li>bloqueo de canales.</li>
+<li>Comprender cómo se integran <strong>Microsoft Purview</strong> y <strong>sensitivity labels</strong> en Copilot Studio (y sus limitaciones por estar en preview).</li>
+<li>Aplicar mitigaciones básicas frente a <strong>prompt injection</strong>, sin bloquear el negocio.</li>
+</ol>
+<hr />
+<h2 id="2-el-riesgo-top-1-en-rag-empresarial-exposicion-de-contenido">2) El riesgo “top 1” en RAG empresarial: <strong>exposición de contenido</strong><a class="headerlink" href="#2-el-riesgo-top-1-en-rag-empresarial-exposicion-de-contenido" title="Permanent link">&para;</a></h2>
+<p>En un RAG corporativo, el riesgo no es solo que “invente”: es que <strong>muestre lo que no debe</strong>.</p>
+<h3 id="21-tres-superficies-de-riesgo">2.1 Tres superficies de riesgo<a class="headerlink" href="#21-tres-superficies-de-riesgo" title="Permanent link">&para;</a></h3>
+<p>1) <strong>Fuentes de conocimiento</strong><br />
+   - documentos internos
+   - intranet
+   - repositorios (SharePoint/Dataverse)</p>
+<p>2) <strong>Herramientas / acciones</strong><br />
+   - conectores, Power Automate, HTTP, skills
+   - capacidad de leer/escribir datos</p>
+<p>3) <strong>Canales de publicación</strong>
+   - Teams, web, WhatsApp, etc.
+   - cada canal tiene su propio “perímetro” y exposición</p>
+<hr />
+<h2 id="3-permisos-por-usuario-y-control-de-acceso-a-origenes">3) Permisos por usuario y control de acceso a orígenes<a class="headerlink" href="#3-permisos-por-usuario-y-control-de-acceso-a-origenes" title="Permanent link">&para;</a></h2>
+<h3 id="31-principio">3.1 Principio<a class="headerlink" href="#31-principio" title="Permanent link">&para;</a></h3>
+<p><strong>El agente debería “ver” lo que ve el usuario.</strong><br />
+Si no, el agente se convierte en un “puente” involuntario de datos.</p>
+<h3 id="32-que-implica-esto-en-copilot-studio-modelo-mental">3.2 Qué implica esto en Copilot Studio (modelo mental)<a class="headerlink" href="#32-que-implica-esto-en-copilot-studio-modelo-mental" title="Permanent link">&para;</a></h3>
+<p>En Copilot Studio, algunas fuentes soportan autenticación por usuario (Entra ID) y otras no:</p>
+<ul>
+<li><strong>SharePoint</strong> como knowledge source suele usar autenticación del usuario del agente (Entra ID).  </li>
+<li><strong>Dataverse</strong> como knowledge source también soporta Entra ID (en escenarios de autenticación).  </li>
+<li><strong>Documents subidos a Dataverse</strong> (documents knowledge source) no requieren autenticación y, por tanto, si se usan, debes tratarlos como “conocimiento accesible para cualquier usuario del agente”.</li>
+</ul>
+<blockquote>
+<p>Regla práctica:<br />
+- para contenido “sensible por persona/grupo”, preferir fuentes con auth del usuario.<br />
+- para contenido “apto para todos los usuarios del agente”, Documents/Dataverse puede ser correcto.</p>
+</blockquote>
+<h3 id="33-diseno-recomendado-de-permisos">3.3 Diseño recomendado de permisos<a class="headerlink" href="#33-diseno-recomendado-de-permisos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define perfiles:</li>
+<li><strong>Anónimo</strong> (si existiera): mínimo, sin datos internos</li>
+<li><strong>Empleado</strong>: políticas generales y procedimientos</li>
+<li><strong>RRHH / Legal / IT</strong>: conocimiento con scope más estrecho</li>
+<li>
+<p><strong>Manager</strong>: contenido adicional</p>
+</li>
+<li>
+<p>Implementa:</p>
+</li>
+<li>segmentación por agentes (un agente por dominio) <strong>o</strong></li>
+<li>segmentación por fuentes + filtros + auth.</li>
+</ul>
+<hr />
+<h2 id="4-data-loss-prevention-dlp-data-policies-para-agentes">4) Data Loss Prevention (DLP) / Data policies para agentes<a class="headerlink" href="#4-data-loss-prevention-dlp-data-policies-para-agentes" title="Permanent link">&para;</a></h2>
+<h3 id="41-que-es-dlp-en-power-platform">4.1 ¿Qué es DLP en Power Platform?<a class="headerlink" href="#41-que-es-dlp-en-power-platform" title="Permanent link">&para;</a></h3>
+<p>Las <strong>data policies</strong> permiten agrupar conectores en:
+- Business
+- Non‑business
+- Blocked</p>
+<p>y controlar si pueden compartir datos entre ellos.</p>
+<p>Además, en Copilot Studio, puedes aplicar políticas para:
+- requerir autenticación,
+- bloquear knowledge sources,
+- bloquear tools (conectores), HTTP, skills,
+- bloquear publicación a canales específicos,
+- bloquear triggers, etc.</p>
+<blockquote>
+<p>Traducción: DLP es el “freno de mano” corporativo.</p>
+</blockquote>
+<hr />
+<h3 id="42-controles-habituales-y-como-usarlos-ejemplos">4.2 Controles habituales y cómo usarlos (ejemplos)<a class="headerlink" href="#42-controles-habituales-y-como-usarlos-ejemplos" title="Permanent link">&para;</a></h3>
+<h4 id="a-requerir-autenticacion">A) Requerir autenticación<a class="headerlink" href="#a-requerir-autenticacion" title="Permanent link">&para;</a></h4>
+<p>Evita que makers publiquen agentes sin autenticación (link público).</p>
+<ul>
+<li>Diseña política: bloquear el conector “Chat without Microsoft Entra ID authentication…”</li>
+<li>Resultado: los agentes deben usar “Authenticate with Microsoft” o “Authenticate manually”.</li>
+</ul>
+<h4 id="b-bloquear-knowledge-sources-especificos">B) Bloquear knowledge sources específicos<a class="headerlink" href="#b-bloquear-knowledge-sources-especificos" title="Permanent link">&para;</a></h4>
+<ul>
+<li>bloquear “public websites” como conocimiento (si tu compliance lo exige),</li>
+<li>bloquear “documents” subidos (si quieres evitar duplicación),</li>
+<li>o permitir solo SharePoint con endpoints filtrados (allow list).</li>
+</ul>
+<h4 id="c-bloquear-http-o-conectores-como-herramientas">C) Bloquear HTTP o conectores como herramientas<a class="headerlink" href="#c-bloquear-http-o-conectores-como-herramientas" title="Permanent link">&para;</a></h4>
+<ul>
+<li>reduce riesgo de exfiltración (e.g., llamar a endpoints externos no aprobados).</li>
+</ul>
+<h4 id="d-bloquear-canales-de-publicacion">D) Bloquear canales de publicación<a class="headerlink" href="#d-bloquear-canales-de-publicacion" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ejemplo: bloquear WhatsApp en un entorno corporativo de alto riesgo.</li>
+</ul>
+<hr />
+<h3 id="43-advertencia-operativa-evaluacion-automatica-y-dlp">4.3 Advertencia operativa: evaluación automática y DLP<a class="headerlink" href="#43-advertencia-operativa-evaluacion-automatica-y-dlp" title="Permanent link">&para;</a></h3>
+<p>Las evaluaciones automáticas pueden requerir conectores y autenticación.<br />
+DLP puede bloquear:
+- el conector de Copilot Studio,
+- o la capacidad de ejecutar evaluaciones automatizadas con cuentas autenticadas.</p>
+<p>Esto es deseable cuando:
+- quieres prevenir “scraping interno” accidental desde cuentas con demasiados permisos.</p>
+<hr />
+<h2 id="5-sensitivity-labels-microsoft-purview-y-senales-para-el-usuario">5) Sensitivity labels (Microsoft Purview) y señales para el usuario<a class="headerlink" href="#5-sensitivity-labels-microsoft-purview-y-senales-para-el-usuario" title="Permanent link">&para;</a></h2>
+<h3 id="51-que-aportan-las-etiquetas">5.1 Qué aportan las etiquetas<a class="headerlink" href="#51-que-aportan-las-etiquetas" title="Permanent link">&para;</a></h3>
+<p>Las <strong>sensitivity labels</strong> permiten:
+- clasificar contenido (p. ej., “Confidential”),
+- aplicar políticas de protección,
+- y hacer visible el nivel de sensibilidad en el consumo.</p>
+<p>En Copilot Studio (según documentación en preview):
+- el usuario puede ver un icono (escudo) con el label más alto utilizado,
+- y labels por cada archivo citado, si aplica.</p>
+<blockquote>
+<p>Esto ayuda a:<br />
+- concienciar al usuario (“esta respuesta usa fuentes Confidential”),<br />
+- mejorar auditoría y trazabilidad,<br />
+- activar políticas de prevención (según configuración de Purview).</p>
+</blockquote>
+<h3 id="52-limitacion">5.2 Limitación<a class="headerlink" href="#52-limitacion" title="Permanent link">&para;</a></h3>
+<p>Al estar en preview, puede haber:
+- fuentes soportadas limitadas,
+- restricciones de funcionalidad,
+- cambios futuros.</p>
+<hr />
+<h2 id="6-microsoft-purview-auditoria-dlp-y-cumplimiento-en-interacciones-con-ia">6) Microsoft Purview: auditoría, DLP y cumplimiento en interacciones con IA<a class="headerlink" href="#6-microsoft-purview-auditoria-dlp-y-cumplimiento-en-interacciones-con-ia" title="Permanent link">&para;</a></h2>
+<p>En entornos enterprise, la pregunta no es solo “¿funciona?”, sino:</p>
+<ul>
+<li>¿queda auditado?</li>
+<li>¿cumple DLP?</li>
+<li>¿qué datos se compartieron y desde dónde?</li>
+</ul>
+<p>Microsoft Purview soporta, para interacciones con agentes de Copilot Studio (a nivel de capacidades):
+- Auditing,
+- Data classification,
+- Sensitivity labels,
+- DLP,
+- eDiscovery, etc.</p>
+<p>Además, (según documentación) prompts y respuestas pueden capturarse en logs unificados de auditoría, incluyendo referencias a archivos accedidos y sus labels.</p>
+<blockquote>
+<p>Esto es clave para:<br />
+- investigaciones internas,<br />
+- respuesta a incidentes,<br />
+- cumplimiento normativo.</p>
+</blockquote>
+<hr />
+<h2 id="7-mitigacion-basica-frente-a-prompt-injection-sin-paranoia-con-metodo">7) Mitigación básica frente a prompt injection (sin paranoia, con método)<a class="headerlink" href="#7-mitigacion-basica-frente-a-prompt-injection-sin-paranoia-con-metodo" title="Permanent link">&para;</a></h2>
+<h3 id="71-que-es-prompt-injection-definicion-operativa">7.1 Qué es prompt injection (definición operativa)<a class="headerlink" href="#71-que-es-prompt-injection-definicion-operativa" title="Permanent link">&para;</a></h3>
+<p>Un atacante intenta conseguir que el sistema:
+- ignore instrucciones del agente,
+- exfiltre información,
+- ejecute acciones no deseadas,
+- “se salte” políticas.</p>
+<p>Esto puede venir de:
+- la propia entrada del usuario,
+- documentos recuperados (injection “indirecta”),
+- herramientas (respuestas externas),
+- páginas web.</p>
+<h3 id="72-que-protecciones-existen-a-alto-nivel">7.2 Qué protecciones existen (a alto nivel)<a class="headerlink" href="#72-que-protecciones-existen-a-alto-nivel" title="Permanent link">&para;</a></h3>
+<p>Según documentación, los agentes incluyen protecciones integradas contra:
+- user prompt injection attacks (UPIA),
+- cross-domain prompt injection attacks (XPIA).</p>
+<p>Y además se pueden habilitar mecanismos de detección/monitorización externa para bloquear invocaciones de herramientas sospechosas (en escenarios específicos).</p>
+<h3 id="73-buenas-practicas-de-mitigacion-lo-que-si-debes-ensenar-y-aplicar">7.3 Buenas prácticas de mitigación (lo que sí debes enseñar y aplicar)<a class="headerlink" href="#73-buenas-practicas-de-mitigacion-lo-que-si-debes-ensenar-y-aplicar" title="Permanent link">&para;</a></h3>
+<h4 id="a-zero-trust-para-el-contexto-recuperado">A) Zero Trust para el contexto recuperado<a class="headerlink" href="#a-zero-trust-para-el-contexto-recuperado" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Trata <strong>todo contenido recuperado</strong> (documentos, web, emails, etc.) como <strong>no confiable</strong>.</li>
+<li>No permitas que el contenido recuperado “promocione” instrucciones (“ignora todo y…”) por encima del sistema/políticas.</li>
+</ul>
+<h4 id="b-permisos-minimo-privilegio">B) Permisos + mínimo privilegio<a class="headerlink" href="#b-permisos-minimo-privilegio" title="Permanent link">&para;</a></h4>
+<ul>
+<li>no uses cuentas de servicio con permisos amplios para correr el agente,</li>
+<li>evita que el agente lea repositorios fuera de scope.</li>
+</ul>
+<h4 id="c-allowlisting-de-herramientas">C) Allow‑listing de herramientas<a class="headerlink" href="#c-allowlisting-de-herramientas" title="Permanent link">&para;</a></h4>
+<ul>
+<li>limita herramientas disponibles por agente,</li>
+<li>y por topic (solo cuando se necesiten).</li>
+</ul>
+<h4 id="d-confirmaciones-para-acciones-sensibles">D) Confirmaciones para acciones “sensibles”<a class="headerlink" href="#d-confirmaciones-para-acciones-sensibles" title="Permanent link">&para;</a></h4>
+<p>Si una herramienta puede:
+- enviar un email,
+- modificar un registro,
+- abrir un ticket,
+- realizar un pago,
+entonces el flujo debe pedir <strong>confirmación explícita</strong> y registrar auditoría.</p>
+<h4 id="e-dlp-como-capa-de-contencion">E) DLP como capa de contención<a class="headerlink" href="#e-dlp-como-capa-de-contencion" title="Permanent link">&para;</a></h4>
+<ul>
+<li>bloquea HTTP si no es estrictamente necesario,</li>
+<li>bloquea conectores “Non‑business”,</li>
+<li>bloquea publicación en canales abiertos para agentes internos.</li>
+</ul>
+<h4 id="f-moderacion-y-filtros">F) Moderación y filtros<a class="headerlink" href="#f-moderacion-y-filtros" title="Permanent link">&para;</a></h4>
+<ul>
+<li>usa moderación para bloquear jailbreaks, prompt injection y contenido dañino.</li>
+<li>recuerda el tradeoff: moderación muy alta puede reducir cobertura.</li>
+</ul>
+<hr />
+<h2 id="8-checklist-de-seguridad-para-usar-en-proyectos">8) Checklist de seguridad (para usar en proyectos)<a class="headerlink" href="#8-checklist-de-seguridad-para-usar-en-proyectos" title="Permanent link">&para;</a></h2>
+<h3 id="81-checklist-tecnicoorganizativo">8.1 Checklist técnico‑organizativo<a class="headerlink" href="#81-checklist-tecnicoorganizativo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] El agente requiere autenticación (Entra ID) si maneja contenido interno.</li>
+<li>[ ] Las knowledge sources críticas usan permisos por usuario.</li>
+<li>[ ] Se ha definido “alcance del conocimiento” y se valida con test cases fuera de scope.</li>
+<li>[ ] DLP: conectores clasificados (Business/Non‑business/Blocked).</li>
+<li>[ ] DLP: bloqueo de canales no aprobados.</li>
+<li>[ ] Sensitivity labels habilitadas (si aplica) y revisadas en UX.</li>
+<li>[ ] Auditoría habilitada (Purview / Sentinel si corresponde).</li>
+<li>[ ] Prompt injection: allow‑listing de tools + confirmación para acciones críticas.</li>
+</ul>
+<hr />
+<h2 id="9-arquitectura-de-referencia-simplificada">9) Arquitectura de referencia (simplificada)<a class="headerlink" href="#9-arquitectura-de-referencia-simplificada" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>flowchart LR
+  U[Usuario autenticado] --&gt;|Teams/SharePoint| A[Agente Copilot Studio]
+  A --&gt;|Retrieval con permisos| SP[SharePoint/Dataverse con Entra ID]
+  A --&gt;|Docs públicos internos| DV[Documents en Dataverse]
+  A --&gt;|Tools allow-listed| T[Acciones / Flujos]
+  A --&gt;|Logs| P[Purview / Sentinel]
+  P --&gt;|Políticas| D[DLP / Data policies]
+</code></pre></div>
+<hr />
+<h2 id="10-lectura-opcional-oficial">10) Lectura opcional (oficial)<a class="headerlink" href="#10-lectura-opcional-oficial" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Copilot Studio — Security and governance (conceptos y controles):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance
+
+Copilot Studio — Configure data policies for agents (DLP / gobierno):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention
+
+Copilot Studio — View sensitivity labels in agent responses (preview):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/sensitivity-label-copilot-studio
+
+Microsoft Purview — Security &amp; compliance for Copilot Studio agents:
+https://learn.microsoft.com/en-us/purview/ai-copilot-studio
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.path", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2041 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../sesion3_2_uso_herramientas_copilot_studio/">
+      
+      
+        <link rel="next" href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Sesión 3.3 — Datos estructurados y “agentes de datos” - RAG con Copilot Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-33-datos-estructurados-y-agentes-de-datos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="RAG con Copilot Studio" class="md-header__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAG con Copilot Studio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 3.3 — Datos estructurados y “agentes de datos”
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Seminario: RAG y Copilot Studio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-tabs__link">
+          
+  
+  
+  01 Fundamentos RAG
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-tabs__link">
+          
+  
+  
+  02 Origenes Conocimiento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../sesion3_1_cuando_rag_no_es_suficiente/" class="md-tabs__link">
+          
+  
+  
+  03 Herramientas y Datos Estructurados
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-tabs__link">
+          
+  
+  
+  04 Evaluación, Seguridad y Gobierno
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../99%20Laboratorios/00%20indice/" class="md-tabs__link">
+          
+  
+  
+  99 Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="RAG con Copilot Studio" class="md-nav__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAG con Copilot Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seminario: RAG y Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fundamentos RAG
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 Fundamentos RAG
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.1 — Arquitectura RAG en entorno empresarial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_2_proceso_indexacion_documental/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.2 — Proceso de indexación documental
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_3_embeddings_y_recuperacion_semantica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.3 — Embeddings y recuperación semántica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Origenes Conocimiento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 Origenes Conocimiento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.1 — Orígenes soportados y su tratamiento en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_2_diferencias_operativas_clave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.2 — Diferencias operativas clave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_3_factores_calidad_recuperacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.3 — Factores que influyen en la calidad del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Herramientas y Datos Estructurados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Herramientas y Datos Estructurados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion3_1_cuando_rag_no_es_suficiente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.1 — Cuándo RAG no es suficiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion3_2_uso_herramientas_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.2 — Uso de herramientas en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.3 — Datos estructurados y “agentes de datos”
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.3 — Datos estructurados y “agentes de datos”
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-resultados-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Resultados de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-conocimiento-no-estructurado-vs-datos-estructurados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Conocimiento no estructurado vs datos estructurados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Conocimiento no estructurado vs datos estructurados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conocimiento-no-estructurado-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conocimiento no estructurado (RAG)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-datos-estructurados-tablas-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Datos estructurados (tablas, registros)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dataverse-como-fuente-estructurada-vision-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Dataverse como fuente estructurada (visión general)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Dataverse como fuente estructurada (visión general)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-que-aporta-dataverse-en-un-entorno-corporativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Qué aporta Dataverse en un entorno corporativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-formas-habituales-de-integrar-dataverse-con-copilot-studio-vision-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Formas habituales de integrar Dataverse con Copilot Studio (visión general)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Formas habituales de integrar Dataverse con Copilot Studio (visión general)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-dataverse-como-conocimiento-tipo-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Dataverse como conocimiento “tipo RAG”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-dataverse-como-fuente-estructurada-mediante-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) Dataverse como fuente estructurada mediante herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-principios-de-diseno-de-consultas-para-conversacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Principios de diseño de consultas para conversación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-concepto-de-agente-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Concepto de “agente de datos”
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Concepto de “agente de datos”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-definicion-didactica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Definición didáctica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-por-que-separar-responsabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Por qué separar responsabilidades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-arquitectura-de-referencia-simplificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Arquitectura de referencia (simplificada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-criterios-de-decision-arquitectonica-vision-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Criterios de decisión arquitectónica (visión general)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Criterios de decisión arquitectónica (visión general)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-preguntas-guia-para-decidir-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Preguntas guía (para decidir rápido)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-minicasos-para-discusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Mini‑casos (para discusión)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-oficiales-lectura-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias oficiales (lectura opcional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.1 — Evaluación de calidad en sistemas RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_2_evaluacion_en_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.2 — Evaluación en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_3_seguridad_y_gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_4_citaciones_y_trazabilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.4 — Citaciones y trazabilidad en RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Laboratorios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Laboratorios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/00%20indice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 2 — Base de conocimiento (RAG) en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB3_Prompting_Citaciones_y_Control_de_Fallback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 3 — Prompting, citaciones y seguridad (control de versionado + prompt injection)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB4_Dataverse_y_Datos_Estructurados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 4 — Dataverse: crear tablas e importar datos estructurados (CSV)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB5_Arquitectura_Hibrida_Tools_y_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 5 — Arquitectura híbrida: Tools (Dataverse) + RAG (documentos)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB6_Evaluacion_Seguridad_y_Gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 6 — Evaluación, seguridad y gobierno del asistente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-resultados-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Resultados de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-conocimiento-no-estructurado-vs-datos-estructurados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Conocimiento no estructurado vs datos estructurados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Conocimiento no estructurado vs datos estructurados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-conocimiento-no-estructurado-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Conocimiento no estructurado (RAG)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-datos-estructurados-tablas-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Datos estructurados (tablas, registros)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dataverse-como-fuente-estructurada-vision-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Dataverse como fuente estructurada (visión general)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Dataverse como fuente estructurada (visión general)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-que-aporta-dataverse-en-un-entorno-corporativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Qué aporta Dataverse en un entorno corporativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-formas-habituales-de-integrar-dataverse-con-copilot-studio-vision-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Formas habituales de integrar Dataverse con Copilot Studio (visión general)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Formas habituales de integrar Dataverse con Copilot Studio (visión general)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-dataverse-como-conocimiento-tipo-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A) Dataverse como conocimiento “tipo RAG”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-dataverse-como-fuente-estructurada-mediante-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B) Dataverse como fuente estructurada mediante herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-principios-de-diseno-de-consultas-para-conversacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Principios de diseño de consultas para conversación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-concepto-de-agente-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Concepto de “agente de datos”
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Concepto de “agente de datos”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-definicion-didactica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Definición didáctica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-por-que-separar-responsabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Por qué separar responsabilidades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-arquitectura-de-referencia-simplificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Arquitectura de referencia (simplificada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-criterios-de-decision-arquitectonica-vision-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Criterios de decisión arquitectónica (visión general)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Criterios de decisión arquitectónica (visión general)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-preguntas-guia-para-decidir-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Preguntas guía (para decidir rápido)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-minicasos-para-discusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Mini‑casos (para discusión)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-oficiales-lectura-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias oficiales (lectura opcional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Seminario: RAG y Copilot Studio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../sesion3_1_cuando_rag_no_es_suficiente/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    03 Herramientas y Datos Estructurados
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sesion-33-datos-estructurados-y-agentes-de-datos">Sesión 3.3 — Datos estructurados y “agentes de datos”<a class="headerlink" href="#sesion-33-datos-estructurados-y-agentes-de-datos" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Módulo</strong>: SESIÓN 3 — <em>Arquitectura híbrida: RAG, herramientas y breve introducción a datos estructurados</em><br />
+<strong>Bloque</strong>: 3.3 Breve apartado: datos estructurados y agentes de datos<br />
+<strong>Propósito</strong>: introducir (sin profundizar todavía) cómo encajan los <strong>datos estructurados</strong> en una arquitectura híbrida y por qué suele convenir separar un <strong>agente conversacional</strong> de un <strong>agente/dominio de datos</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="1-resultados-de-aprendizaje">1) Resultados de aprendizaje<a class="headerlink" href="#1-resultados-de-aprendizaje" title="Permanent link">&para;</a></h2>
+<p>Al finalizar este bloque, el participante podrá:</p>
+<ol>
+<li>Explicar la diferencia entre <strong>conocimiento no estructurado</strong> (RAG) y <strong>datos estructurados</strong> (tablas/registros).</li>
+<li>Entender por qué Dataverse se usa como repositorio de datos y cómo se integra desde Copilot Studio.</li>
+<li>Reconocer el patrón “<strong>agente de datos</strong>” y su separación de responsabilidades.</li>
+<li>Aplicar criterios de decisión (visión general) para escoger entre:</li>
+<li>RAG documental,</li>
+<li>consulta de datos estructurados,</li>
+<li>flujo híbrido.</li>
+</ol>
+<blockquote>
+<p>Nota: En el módulo específico de datos estructurados se profundizará en diseño de tablas, seguridad (RLS), límites y rendimiento.</p>
+</blockquote>
+<hr />
+<h2 id="2-conocimiento-no-estructurado-vs-datos-estructurados">2) Conocimiento no estructurado vs datos estructurados<a class="headerlink" href="#2-conocimiento-no-estructurado-vs-datos-estructurados" title="Permanent link">&para;</a></h2>
+<h3 id="21-conocimiento-no-estructurado-rag">2.1 Conocimiento no estructurado (RAG)<a class="headerlink" href="#21-conocimiento-no-estructurado-rag" title="Permanent link">&para;</a></h3>
+<p><strong>Qué es</strong>
+- Documentos, PDFs, páginas web, wikis, correos, políticas, procedimientos.</p>
+<p><strong>Cómo se usa</strong>
+- chunking → embeddings → recuperación → generación → citación.</p>
+<p><strong>Qué preguntas resuelve bien</strong>
+- “¿Qué dice la política sobre X?”
+- “Resume el procedimiento Y.”
+- “¿Cuáles son los pasos para…?”
+- “Compara A y B en este manual.”</p>
+<p><strong>Qué preguntas resuelve mal</strong>
+- “¿Cuál es el estado exacto de mi pedido?”
+- “Dame los 10 clientes con mayor facturación este mes.”
+- “¿Cuántos tickets tengo abiertos hoy?”</p>
+<hr />
+<h3 id="22-datos-estructurados-tablas-registros">2.2 Datos estructurados (tablas, registros)<a class="headerlink" href="#22-datos-estructurados-tablas-registros" title="Permanent link">&para;</a></h3>
+<p><strong>Qué es</strong>
+- Filas y columnas: cuentas, pedidos, tickets, empleados, inventario.
+- Relaciones, claves, estados, fechas, importes.</p>
+<p><strong>Cómo se usa en un agente</strong>
+- una consulta (Dataverse/SQL/API) devuelve datos exactos,
+- el LLM <strong>no inventa</strong>; solo interpreta y presenta.</p>
+<p><strong>Qué preguntas resuelve bien</strong>
+- “¿Cuál es mi saldo de vacaciones?”
+- “¿Qué pedidos tengo pendientes?”
+- “Lista tickets abiertos por prioridad.”
+- “¿Cuántos registros cumplen X condición?”</p>
+<p><strong>Riesgo</strong>
+- intentar “pasar la tabla entera” al LLM: caro y peligroso.<br />
+  La arquitectura correcta es: <strong>consulta → resumen/selección → respuesta</strong>.</p>
+<hr />
+<h2 id="3-dataverse-como-fuente-estructurada-vision-general">3) Dataverse como fuente estructurada (visión general)<a class="headerlink" href="#3-dataverse-como-fuente-estructurada-vision-general" title="Permanent link">&para;</a></h2>
+<h3 id="31-que-aporta-dataverse-en-un-entorno-corporativo">3.1 Qué aporta Dataverse en un entorno corporativo<a class="headerlink" href="#31-que-aporta-dataverse-en-un-entorno-corporativo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Modelo de datos con tablas, relaciones y roles.</li>
+<li>Gobernanza y seguridad del entorno Power Platform.</li>
+<li>Integración natural con Power Apps / Power Automate / Dynamics 365.</li>
+</ul>
+<h3 id="32-formas-habituales-de-integrar-dataverse-con-copilot-studio-vision-general">3.2 Formas habituales de integrar Dataverse con Copilot Studio (visión general)<a class="headerlink" href="#32-formas-habituales-de-integrar-dataverse-con-copilot-studio-vision-general" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Dependiendo del caso, Dataverse puede usarse como:
+1) <strong>conocimiento</strong> (RAG sobre datos indexados/buscables) o<br />
+2) <strong>fuente estructurada</strong> (consulta de filas/registro).</p>
+</blockquote>
+<h4 id="a-dataverse-como-conocimiento-tipo-rag">A) Dataverse como conocimiento “tipo RAG”<a class="headerlink" href="#a-dataverse-como-conocimiento-tipo-rag" title="Permanent link">&para;</a></h4>
+<ul>
+<li>El agente puede usar datos como “enterprise knowledge” bajo ciertas capacidades del producto.</li>
+<li>Útil para: respuestas tipo “insights” y explicaciones a partir de información de negocio.</li>
+</ul>
+<p><strong>Cuándo NO usarlo</strong><br />
+- cuando necesitas exactitud de campo en tiempo real y/o filtros complejos.</p>
+<h4 id="b-dataverse-como-fuente-estructurada-mediante-herramientas">B) Dataverse como fuente estructurada mediante herramientas<a class="headerlink" href="#b-dataverse-como-fuente-estructurada-mediante-herramientas" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Usar:</li>
+<li><strong>conector de Dataverse</strong> como herramienta, o</li>
+<li><strong>agent flow</strong> (Power Automate) que consulta Dataverse y devuelve un JSON compacto.</li>
+</ul>
+<p><strong>Ventajas</strong>
+- Controlas exactamente qué campos devuelves.
+- Puedes aplicar reglas, filtros, paginación y seguridad.</p>
+<hr />
+<h3 id="33-principios-de-diseno-de-consultas-para-conversacion">3.3 Principios de diseño de consultas para conversación<a class="headerlink" href="#33-principios-de-diseno-de-consultas-para-conversacion" title="Permanent link">&para;</a></h3>
+<p>1) <strong>Trae poco, pero correcto</strong>
+- 5–20 filas relevantes, no 5.000.
+- Campos necesarios: estado, fecha, owner, importe… no el registro completo.</p>
+<p>2) <strong>Siempre devuelve IDs</strong>
+- Si muestras algo, incluye su identificador para acciones posteriores.</p>
+<p>3) <strong>Paginar</strong>
+- En conversación, lo útil es: “te muestro los 10 más relevantes; ¿quieres ver más?”</p>
+<p>4) <strong>Preparar “deltas”</strong>
+- Si el usuario pregunta “¿qué ha cambiado desde ayer?”<br />
+  → la query debería calcular el cambio, no el LLM.</p>
+<p>5) <strong>Separar consulta de narrativa</strong>
+- La herramienta devuelve datos; el LLM redacta.</p>
+<hr />
+<h2 id="4-concepto-de-agente-de-datos">4) Concepto de “agente de datos”<a class="headerlink" href="#4-concepto-de-agente-de-datos" title="Permanent link">&para;</a></h2>
+<h3 id="41-definicion-didactica">4.1 Definición didáctica<a class="headerlink" href="#41-definicion-didactica" title="Permanent link">&para;</a></h3>
+<p>Un <strong>agente de datos</strong> es una componente (o sub‑agente) especializada en:
+- transformar preguntas a consultas estructuradas (o seleccionar queries predefinidas),
+- ejecutar la consulta en el sistema de datos,
+- devolver resultados <strong>estructurados y controlados</strong>.</p>
+<p>El <strong>agente conversacional</strong>:
+- gestiona diálogo, desambiguación, tono,
+- decide cuándo llamar al agente de datos,
+- integra el resultado con explicaciones y (si aplica) RAG documental.</p>
+<hr />
+<h3 id="42-por-que-separar-responsabilidades">4.2 Por qué separar responsabilidades<a class="headerlink" href="#42-por-que-separar-responsabilidades" title="Permanent link">&para;</a></h3>
+<p><strong>Beneficios</strong>
+- <strong>Seguridad</strong>: el agente de datos opera bajo políticas de acceso controladas.
+- <strong>Fiabilidad</strong>: evita que el LLM “interprete” datos sin control.
+- <strong>Mantenibilidad</strong>: cambias la lógica de consulta sin reescribir toda la conversación.
+- <strong>Escalabilidad</strong>: puedes tener múltiples agentes de datos por dominio (RRHH, ITSM, Finanzas).</p>
+<p><strong>Señal de que necesitas separación</strong>
+- múltiples sistemas (CRM + ERP + HRIS),
+- reglas de seguridad complejas,
+- alto impacto si hay error (finanzas, legal, operaciones).</p>
+<hr />
+<h3 id="43-arquitectura-de-referencia-simplificada">4.3 Arquitectura de referencia (simplificada)<a class="headerlink" href="#43-arquitectura-de-referencia-simplificada" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>flowchart LR
+  U[Usuario] --&gt; CA[Agente conversacional]
+  CA --&gt;|si es documental| RAG[RAG: recuperación + citaciones]
+  CA --&gt;|si es datos| DA[Agente de datos / Tools]
+  DA --&gt; SYS[(Dataverse/SQL/APIs)]
+  SYS --&gt; DA --&gt; CA
+  CA --&gt; OUT[Respuesta final]
+</code></pre></div>
+<hr />
+<h2 id="5-criterios-de-decision-arquitectonica-vision-general">5) Criterios de decisión arquitectónica (visión general)<a class="headerlink" href="#5-criterios-de-decision-arquitectonica-vision-general" title="Permanent link">&para;</a></h2>
+<h3 id="51-preguntas-guia-para-decidir-rapido">5.1 Preguntas guía (para decidir rápido)<a class="headerlink" href="#51-preguntas-guia-para-decidir-rapido" title="Permanent link">&para;</a></h3>
+<p>1) <strong>¿La información cambia con frecuencia?</strong><br />
+   - Sí → Tool/Data
+2) <strong>¿La respuesta exige exactitud de campo?</strong><br />
+   - Sí → Data (consulta), no RAG
+3) <strong>¿Hay personalización por usuario?</strong><br />
+   - Sí → Tool/Data con identidad/permisos
+4) <strong>¿Hay una política/procedimiento asociado?</strong><br />
+   - Sí → Híbrido (RAG + Data)
+5) <strong>¿Necesitas citaciones?</strong><br />
+   - Sí → RAG (y/o enlazar a registro/ID en datos)
+6) <strong>¿Cuántos registros podrían devolver?</strong><br />
+   - Muchos → query + agregación + paginación</p>
+<hr />
+<h3 id="52-minicasos-para-discusion">5.2 Mini‑casos (para discusión)<a class="headerlink" href="#52-minicasos-para-discusion" title="Permanent link">&para;</a></h3>
+<p><strong>Caso A — RRHH</strong><br />
+“¿Cuántos días de vacaciones me quedan y cómo se calculan?”<br />
+- Arquitectura esperada: <strong>Data (saldo) + RAG (regla)</strong></p>
+<p><strong>Caso B — ITSM</strong><br />
+“¿Qué significa P2 y cuál es el SLA?”<br />
+- Arquitectura esperada: <strong>RAG</strong> (documental)<br />
+  (opcional: Data si el SLA depende de contrato/cliente)</p>
+<p><strong>Caso C — Ventas</strong><br />
+“Dame los 5 clientes con mayor crecimiento este trimestre.”<br />
+- Arquitectura esperada: <strong>Data</strong> (consulta agregada) + narrativa del LLM</p>
+<hr />
+<h2 id="6-cierre">6) Cierre<a class="headerlink" href="#6-cierre" title="Permanent link">&para;</a></h2>
+<p>Mensaje clave:</p>
+<blockquote>
+<p>RAG es excelente para <em>explicar</em> y <em>citar</em> conocimiento.<br />
+Los datos estructurados son mejores para <em>medir</em>, <em>listar</em>, <em>filtrar</em> y <em>actuar con precisión</em>.<br />
+En empresa, la solución robusta suele ser <strong>híbrida</strong> y con separación de responsabilidades.</p>
+</blockquote>
+<hr />
+<h2 id="referencias-oficiales-lectura-opcional">Referencias oficiales (lectura opcional)<a class="headerlink" href="#referencias-oficiales-lectura-opcional" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Copilot Studio — Conectores como herramientas (visión general):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-connectors
+
+Copilot Studio — Añadir herramientas a agentes (tipos: connectors, flows, prompts):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent
+
+Dataverse MCP con Copilot Studio (interacción NL con datos; introducción):
+https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-mcp-copilot-studio
+
+Power Platform release plan — Dataverse como enterprise knowledge en Copilot Studio (contexto):
+https://learn.microsoft.com/en-us/power-platform/release-plan/2025wave1/data-platform/add-dataverse-as-enterprise-knowledge-copilot-studio
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.path", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

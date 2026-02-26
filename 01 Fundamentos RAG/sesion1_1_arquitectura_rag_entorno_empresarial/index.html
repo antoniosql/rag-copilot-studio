@@ -1,0 +1,2060 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../sesion1_2_proceso_indexacion_documental/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Sesión 1.1 — Arquitectura RAG en entorno empresarial - RAG con Copilot Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-11-arquitectura-rag-en-entorno-empresarial" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="RAG con Copilot Studio" class="md-header__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAG con Copilot Studio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 1.1 — Arquitectura RAG en entorno empresarial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Seminario: RAG y Copilot Studio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  01 Fundamentos RAG
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-tabs__link">
+          
+  
+  
+  02 Origenes Conocimiento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-tabs__link">
+          
+  
+  
+  03 Herramientas y Datos Estructurados
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-tabs__link">
+          
+  
+  
+  04 Evaluación, Seguridad y Gobierno
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../99%20Laboratorios/00%20indice/" class="md-tabs__link">
+          
+  
+  
+  99 Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="RAG con Copilot Studio" class="md-nav__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAG con Copilot Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seminario: RAG y Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fundamentos RAG
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 Fundamentos RAG
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.1 — Arquitectura RAG en entorno empresarial
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.1 — Arquitectura RAG en entorno empresarial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos-de-aprendizaje-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Objetivos de aprendizaje del bloque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-conceptos-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Conceptos base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Conceptos base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-separacion-entre-modelo-y-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Separación entre modelo y conocimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-flujo-operativo-recuperacion-generacion-citacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Flujo operativo: recuperación → generación → citación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Flujo operativo: recuperación → generación → citación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flujo-clasico-conceptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo clásico (conceptual)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-tipico-industrial-mas-realista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo típico industrial (más realista)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-visual-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo visual (pipeline)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipologias-relevantes-de-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Tipologías relevantes de RAG
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Tipologías relevantes de RAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-rag-basico-vectorfirst-retriever-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 RAG básico (Vector‑first / Retriever + LLM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-rag-hibrido-vector-keywordbm25-reranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 RAG híbrido (Vector + keyword/BM25 + reranking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-rag-conversacional-chataware-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 RAG conversacional (Chat‑aware RAG)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-factores-criticos-en-entornos-corporativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Factores críticos en entornos corporativos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Factores críticos en entornos corporativos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-versionado-documental-y-verdad-vigente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Versionado documental (y “verdad vigente”)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-permisos-seguridad-por-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Permisos (seguridad por usuario)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-alcance-del-conocimiento-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Alcance del conocimiento (scope)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-miniactividad-8-minutos-arquitectura-rag-del-caso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Mini‑actividad (8 minutos): “Arquitectura RAG del caso”
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Mini‑actividad (8 minutos): “Arquitectura RAG del caso”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instrucciones-para-grupos-de-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instrucciones (para grupos de 2–3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plantilla-rapida-copiarpegar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plantilla rápida (copiar/pegar)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-preguntas-de-verificacion-para-cerrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Preguntas de verificación (para cerrar)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion1_2_proceso_indexacion_documental/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.2 — Proceso de indexación documental
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion1_3_embeddings_y_recuperacion_semantica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.3 — Embeddings y recuperación semántica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Origenes Conocimiento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 Origenes Conocimiento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.1 — Orígenes soportados y su tratamiento en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_2_diferencias_operativas_clave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.2 — Diferencias operativas clave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_3_factores_calidad_recuperacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.3 — Factores que influyen en la calidad del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Herramientas y Datos Estructurados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Herramientas y Datos Estructurados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_1_cuando_rag_no_es_suficiente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.1 — Cuándo RAG no es suficiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_2_uso_herramientas_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.2 — Uso de herramientas en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03%20Herramientas%20y%20Datos%20Estructurados/sesion3_3_datos_estructurados_y_agente_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.3 — Datos estructurados y “agentes de datos”
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.1 — Evaluación de calidad en sistemas RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_2_evaluacion_en_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.2 — Evaluación en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_3_seguridad_y_gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_4_citaciones_y_trazabilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.4 — Citaciones y trazabilidad en RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Laboratorios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Laboratorios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/00%20indice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 2 — Base de conocimiento (RAG) en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB3_Prompting_Citaciones_y_Control_de_Fallback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 3 — Prompting, citaciones y seguridad (control de versionado + prompt injection)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB4_Dataverse_y_Datos_Estructurados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 4 — Dataverse: crear tablas e importar datos estructurados (CSV)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB5_Arquitectura_Hibrida_Tools_y_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 5 — Arquitectura híbrida: Tools (Dataverse) + RAG (documentos)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB6_Evaluacion_Seguridad_y_Gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 6 — Evaluación, seguridad y gobierno del asistente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos-de-aprendizaje-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Objetivos de aprendizaje del bloque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-conceptos-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Conceptos base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Conceptos base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-separacion-entre-modelo-y-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Separación entre modelo y conocimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-flujo-operativo-recuperacion-generacion-citacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Flujo operativo: recuperación → generación → citación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Flujo operativo: recuperación → generación → citación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flujo-clasico-conceptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo clásico (conceptual)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-tipico-industrial-mas-realista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo típico industrial (más realista)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-visual-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo visual (pipeline)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipologias-relevantes-de-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Tipologías relevantes de RAG
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Tipologías relevantes de RAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-rag-basico-vectorfirst-retriever-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 RAG básico (Vector‑first / Retriever + LLM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-rag-hibrido-vector-keywordbm25-reranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 RAG híbrido (Vector + keyword/BM25 + reranking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-rag-conversacional-chataware-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 RAG conversacional (Chat‑aware RAG)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-factores-criticos-en-entornos-corporativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Factores críticos en entornos corporativos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Factores críticos en entornos corporativos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-versionado-documental-y-verdad-vigente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Versionado documental (y “verdad vigente”)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-permisos-seguridad-por-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Permisos (seguridad por usuario)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-alcance-del-conocimiento-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Alcance del conocimiento (scope)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-miniactividad-8-minutos-arquitectura-rag-del-caso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Mini‑actividad (8 minutos): “Arquitectura RAG del caso”
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Mini‑actividad (8 minutos): “Arquitectura RAG del caso”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instrucciones-para-grupos-de-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instrucciones (para grupos de 2–3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plantilla-rapida-copiarpegar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plantilla rápida (copiar/pegar)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-preguntas-de-verificacion-para-cerrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Preguntas de verificación (para cerrar)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Seminario: RAG y Copilot Studio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    01 Fundamentos RAG
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sesion-11-arquitectura-rag-en-entorno-empresarial">Sesión 1.1 — Arquitectura RAG en entorno empresarial<a class="headerlink" href="#sesion-11-arquitectura-rag-en-entorno-empresarial" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Bloque</strong>: Sesión 1 — <em>Fundamentos operativos de RAG y su aplicación inicial en Copilot Studio</em><br />
+<strong>Nivel</strong>: intermedio (orientado a implementación)<br />
+<strong>Formato recomendado</strong>: explicación guiada + debate + mini‑ejercicio de diseño</p>
+</blockquote>
+<hr />
+<h2 id="1-objetivos-de-aprendizaje-del-bloque">1) Objetivos de aprendizaje del bloque<a class="headerlink" href="#1-objetivos-de-aprendizaje-del-bloque" title="Permanent link">&para;</a></h2>
+<p>Al finalizar este bloque, el participante será capaz de:</p>
+<ol>
+<li>Explicar por qué en entornos empresariales se separa <strong>modelo</strong> (LLM) de <strong>conocimiento</strong> (documentos/datos).</li>
+<li>Describir el <strong>flujo operativo RAG</strong> y ubicar en qué punto se generan las <strong>citaciones</strong>.</li>
+<li>Diferenciar <strong>RAG básico, híbrido y conversacional</strong>, y reconocer cuándo conviene cada uno.</li>
+<li>Identificar factores críticos corporativos: <strong>versionado documental</strong>, <strong>permisos</strong> y <strong>alcance del conocimiento</strong> (scope).</li>
+</ol>
+<hr />
+<h2 id="2-conceptos-base">2) Conceptos base<a class="headerlink" href="#2-conceptos-base" title="Permanent link">&para;</a></h2>
+<h3 id="21-separacion-entre-modelo-y-conocimiento">2.1 Separación entre <strong>modelo</strong> y <strong>conocimiento</strong><a class="headerlink" href="#21-separacion-entre-modelo-y-conocimiento" title="Permanent link">&para;</a></h3>
+<p><strong>Idea central</strong>: el LLM no “sabe” tu información corporativa (o no debería depender de ello); la empresa controla el conocimiento mediante repositorios, índices y políticas.</p>
+<ul>
+<li><strong>Modelo (LLM)</strong>  </li>
+<li>Aporta: comprensión del lenguaje, redacción, síntesis, razonamiento aproximado.</li>
+<li>Riesgos: “alucinación”, sesgos, datos desactualizados, respuestas no verificables.</li>
+<li>
+<p>Limitación operativa: no tiene acceso nativo a documentación interna a menos que se le provea contexto (RAG) o herramientas.</p>
+</li>
+<li>
+<p><strong>Conocimiento (Knowledge)</strong>  </p>
+</li>
+<li>Son <strong>fuentes controladas</strong>: políticas internas, procedimientos, manuales, SharePoint, Dataverse, webs corporativas, etc.</li>
+<li>Aporta: exactitud, trazabilidad, actualización y gobierno (versiones, permisos, auditoría).</li>
+</ul>
+<p><strong>Beneficios empresariales de la separación</strong>
+- <strong>Control y gobierno</strong>: cambias un documento y el sistema lo “aprende” tras reindexar, sin reentrenar el modelo.
+- <strong>Seguridad</strong>: el acceso al conocimiento puede respetar permisos por usuario (cuando la fuente lo soporta).
+- <strong>Trazabilidad</strong>: puedes exigir citaciones o enlaces a la fuente.
+- <strong>Coste</strong>: reentrenar modelos es caro; indexar documentos y recuperar fragmentos es relativamente económico.</p>
+<p><strong>Antipatrón típico</strong>: “Pegar el contenido en el prompt”<br />
+- No escala.
+- No respeta permisos.
+- No deja auditoría real de qué parte del documento sustentó la respuesta.</p>
+<hr />
+<h3 id="22-flujo-operativo-recuperacion-generacion-citacion">2.2 Flujo operativo: recuperación → generación → citación<a class="headerlink" href="#22-flujo-operativo-recuperacion-generacion-citacion" title="Permanent link">&para;</a></h3>
+<h4 id="flujo-clasico-conceptual">Flujo clásico (conceptual)<a class="headerlink" href="#flujo-clasico-conceptual" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Consulta del usuario</strong></li>
+<li><strong>Recuperación (Retrieval)</strong>: búsqueda en el repositorio/index (texto, vectores o híbrida)</li>
+<li><strong>Construcción de contexto</strong>: selección de fragmentos (chunks) y metadatos</li>
+<li><strong>Generación (Generation)</strong>: el LLM redacta la respuesta usando el contexto recuperado</li>
+<li><strong>Citaciones (Citations)</strong>: se adjuntan referencias a los fragmentos/documentos utilizados</li>
+</ol>
+<h4 id="flujo-tipico-industrial-mas-realista">Flujo típico <em>industrial</em> (más realista)<a class="headerlink" href="#flujo-tipico-industrial-mas-realista" title="Permanent link">&para;</a></h4>
+<p>En la práctica, se suelen añadir pasos para robustez, especialmente en productos “enterprise”:</p>
+<ul>
+<li><strong>Reescritura de consulta (query rewriting)</strong>: el sistema optimiza/expande la pregunta antes de buscar (por ejemplo, incluyendo señales del contexto conversacional).</li>
+<li><strong>Reranking</strong>: una segunda fase reordena resultados para maximizar relevancia.</li>
+<li><strong>Validación de seguridad y gobierno</strong>: filtros (DLP/etiquetas) y moderación.</li>
+<li><strong>Composición de respuesta</strong>: decisión sobre formato, tono, niveles de detalle, etc.</li>
+</ul>
+<h4 id="ejemplo-visual-pipeline">Ejemplo visual (pipeline)<a class="headerlink" href="#ejemplo-visual-pipeline" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>flowchart LR
+    U[Usuario pregunta] --&gt; QR[Reescritura de consulta]
+    QR --&gt; RET[Recuperación: texto/vectores/híbrida]
+    RET --&gt; SEL[Selección + ensamblado de contexto]
+    SEL --&gt; GEN[LLM: generación]
+    GEN --&gt; GOV[Validación: seguridad/gobierno]
+    GOV --&gt; OUT[Respuesta + citaciones]
+</code></pre></div>
+<p><strong>¿Por qué la citación es parte del flujo, no “un extra”?</strong>
+- En empresa, “<strong>¿de dónde sale esto?</strong>” es requisito (compliance, auditoría, calidad).
+- La citación reduce la ansiedad del usuario y permite verificación.
+- Facilita detectar desalineación: si la citación es irrelevante, el problema suele estar en recuperación/chunking/metadata.</p>
+<hr />
+<h2 id="3-tipologias-relevantes-de-rag">3) Tipologías relevantes de RAG<a class="headerlink" href="#3-tipologias-relevantes-de-rag" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Nota didáctica</strong>: estas categorías no son mutuamente excluyentes; se combinan.</p>
+</blockquote>
+<h3 id="31-rag-basico-vectorfirst-retriever-llm">3.1 RAG básico (Vector‑first / Retriever + LLM)<a class="headerlink" href="#31-rag-basico-vectorfirst-retriever-llm" title="Permanent link">&para;</a></h3>
+<p><strong>Estructura mínima</strong>
+- Documentos → chunking → embeddings → índice vectorial
+- Query → embedding → top‑k → prompt con contexto → respuesta</p>
+<p><strong>Pros</strong>
+- Implementación rápida.
+- Funciona bien con lenguaje natural, sin necesidad de keywords exactas.</p>
+<p><strong>Contras</strong>
+- Puede fallar en:
+  - términos exactos (códigos, números, acrónimos raros),
+  - preguntas que requieren coincidencia literal (“¿cuál es el código exacto?”),
+  - diferencias sutiles entre versiones.</p>
+<p><strong>Cuándo usarlo</strong>
+- FAQs internas, manuales, políticas, soporte a usuarios, onboarding.</p>
+<hr />
+<h3 id="32-rag-hibrido-vector-keywordbm25-reranking">3.2 RAG híbrido (Vector + keyword/BM25 + reranking)<a class="headerlink" href="#32-rag-hibrido-vector-keywordbm25-reranking" title="Permanent link">&para;</a></h3>
+<p><strong>Qué añade</strong>
+- Además de similitud semántica (vectores), se añade una <strong>búsqueda léxica</strong> (keyword/BM25).
+- Se fusionan rankings (por ejemplo mediante Reciprocal Rank Fusion) y opcionalmente se aplica <strong>semantic reranking</strong>.</p>
+<p><strong>Por qué es importante en empresa</strong>
+- Los usuarios preguntan mezclando lenguaje natural con:
+  - nombres de sistemas,
+  - códigos de producto,
+  - nomenclaturas internas,
+  - identificadores (“INC‑1234”, “POL‑RRHH‑07”).
+- La búsqueda exclusivamente vectorial puede recuperar textos “parecidos” pero no los correctos.</p>
+<p><strong>Cuándo usarlo</strong>
+- Sistemas donde <strong>precisión</strong> importa (políticas, legal, ITSM, operaciones) y hay lenguaje mixto semántico + exacto.</p>
+<hr />
+<h3 id="33-rag-conversacional-chataware-rag">3.3 RAG conversacional (Chat‑aware RAG)<a class="headerlink" href="#33-rag-conversacional-chataware-rag" title="Permanent link">&para;</a></h3>
+<p><strong>Qué añade</strong>
+- El sistema utiliza el historial (p. ej., “los últimos N turnos”) para:
+  - resolver correferencias (“eso”, “lo anterior”, “esa política”),
+  - completar el contexto (“en el caso de España…”, “para el rol de manager…”),
+  - mantener coherencia (seguir la misma fuente/versión si procede).</p>
+<p><strong>Riesgo</strong>
+- Si el historial introduce ambigüedad o suposiciones erróneas, puede empeorar la recuperación.
+- Se debe controlar <strong>qué</strong> parte del historial se usa y <strong>cómo</strong>.</p>
+<p><strong>Cuándo usarlo</strong>
+- Asistentes internos con conversaciones largas donde se construye el contexto progresivamente.</p>
+<hr />
+<h2 id="4-factores-criticos-en-entornos-corporativos">4) Factores críticos en entornos corporativos<a class="headerlink" href="#4-factores-criticos-en-entornos-corporativos" title="Permanent link">&para;</a></h2>
+<h3 id="41-versionado-documental-y-verdad-vigente">4.1 Versionado documental (y “verdad vigente”)<a class="headerlink" href="#41-versionado-documental-y-verdad-vigente" title="Permanent link">&para;</a></h3>
+<p>Problema frecuente:
+- Hay múltiples versiones de un procedimiento (borrador, en revisión, publicado).
+- El asistente puede recuperar fragmentos de una versión antigua y responder mal.</p>
+<p>Buenas prácticas (arquitectura + operación)
+- <strong>Identificador estable</strong> por documento (DocId) + <strong>VersionId</strong>.
+- Metadatos “vigencia”: <code>valid_from</code>, <code>valid_to</code>, <code>status</code> (draft/approved/published).
+- Política de recuperación:
+  - por defecto: <strong>solo published</strong>,
+  - posibilidad de modo experto: incluir draft con advertencia.</p>
+<p>Patrón útil: <strong>“Latest‑only retrieval”</strong>
+- Si hay varias versiones con el mismo DocId, solo recuperar la más reciente <strong>publicada</strong>.</p>
+<hr />
+<h3 id="42-permisos-seguridad-por-usuario">4.2 Permisos (seguridad por usuario)<a class="headerlink" href="#42-permisos-seguridad-por-usuario" title="Permanent link">&para;</a></h3>
+<p>En empresa, el RAG es tan seguro como su integración con:
+- autenticación (quién es el usuario),
+- autorización (qué puede ver),
+- filtrado de resultados (qué se devuelve).</p>
+<p>Patrones de control
+- <strong>Autorización en la fuente</strong>: SharePoint/Graph devuelve solo lo que el usuario puede ver.
+- <strong>Filtrado por metadatos</strong>: la búsqueda aplica filtros por <code>department</code>, <code>classification</code>, <code>role</code>.
+- <strong>Seguridad a nivel de chunk</strong>: cuando un mismo documento tiene secciones con diferentes niveles de sensibilidad (más complejo).</p>
+<p>Checklist mínimo
+- ¿El agente hace retrieval con credenciales del usuario?
+- ¿Hay escenarios donde el agente “salta” permisos (p. ej., archivos subidos a un repositorio común)?
+- ¿Qué ocurre con el contenido exportado o cacheado?</p>
+<hr />
+<h3 id="43-alcance-del-conocimiento-scope">4.3 Alcance del conocimiento (scope)<a class="headerlink" href="#43-alcance-del-conocimiento-scope" title="Permanent link">&para;</a></h3>
+<p>Una de las causas nº1 de “respuestas malas” es un scope mal definido.</p>
+<p>Errores típicos
+- “Metemos todo SharePoint y ya está”.
+- Mezclar dominios (RRHH + IT + Legal) sin separación.
+- No decidir qué es “fuente de verdad”.</p>
+<p>Buenas prácticas de diseño de alcance
+- Definir:
+  - <strong>dominio</strong> (tema),
+  - <strong>audiencia</strong> (quién),
+  - <strong>objetivo</strong> (para qué),
+  - <strong>fuentes autorizadas</strong> (qué repositorios),
+  - <strong>exclusiones</strong> (qué NO se consulta).
+- Diseñar una <strong>taxonomía</strong> mínima (departamento, país, proceso, producto).
+- Empezar pequeño: <em>un caso de uso, un corpus controlado</em>, y crecer.</p>
+<hr />
+<h2 id="5-miniactividad-8-minutos-arquitectura-rag-del-caso">5) Mini‑actividad (8 minutos): “Arquitectura RAG del caso”<a class="headerlink" href="#5-miniactividad-8-minutos-arquitectura-rag-del-caso" title="Permanent link">&para;</a></h2>
+<h3 id="instrucciones-para-grupos-de-23">Instrucciones (para grupos de 2–3)<a class="headerlink" href="#instrucciones-para-grupos-de-23" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Elegid un caso de uso corporativo:  </li>
+<li>soporte IT interno,  </li>
+<li>políticas de RRHH,  </li>
+<li>procedimientos de calidad,  </li>
+<li>manual de producto.</li>
+<li>Dibujad el flujo RAG y marcad:</li>
+<li>fuentes,</li>
+<li>estrategia de permisos,</li>
+<li>cómo gestionáis versiones,</li>
+<li>si necesitáis RAG básico/híbrido/conversacional.</li>
+<li>Preparad una explicación de 60 segundos.</li>
+</ol>
+<h3 id="plantilla-rapida-copiarpegar">Plantilla rápida (copiar/pegar)<a class="headerlink" href="#plantilla-rapida-copiarpegar" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Caso de uso</strong>:  </li>
+<li><strong>Usuarios objetivo</strong>:  </li>
+<li><strong>Fuentes de conocimiento</strong>:  </li>
+<li><strong>Permisos</strong>: (por usuario / por rol / público interno)  </li>
+<li><strong>Versionado</strong>: (cómo se decide la “verdad vigente”)  </li>
+<li><strong>Tipo de RAG</strong>: (básico / híbrido / conversacional + por qué)  </li>
+<li><strong>Riesgos</strong>: (alucinación, leakage, scope)  </li>
+<li><strong>Mitigaciones</strong>: (citaciones, filtros, governance)</li>
+</ul>
+<hr />
+<h2 id="6-preguntas-de-verificacion-para-cerrar">6) Preguntas de verificación (para cerrar)<a class="headerlink" href="#6-preguntas-de-verificacion-para-cerrar" title="Permanent link">&para;</a></h2>
+<ul>
+<li>¿Qué ventaja aporta separar modelo y conocimiento en una empresa?</li>
+<li>¿En qué punto del pipeline “nace” una citación y qué la puede estropear?</li>
+<li>¿Por qué el RAG híbrido suele ser mejor con códigos, nombres propios y acrónimos?</li>
+<li>¿Qué políticas pondrías para evitar usar versiones antiguas de documentos?</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.path", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

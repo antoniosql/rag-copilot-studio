@@ -1,0 +1,2518 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../02%20Origenes%20Conocimiento/sesion2_3_factores_calidad_recuperacion/">
+      
+      
+        <link rel="next" href="../sesion3_2_uso_herramientas_copilot_studio/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Sesión 3.1 — Cuándo RAG no es suficiente - RAG con Copilot Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-31-cuando-rag-no-es-suficiente" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="RAG con Copilot Studio" class="md-header__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAG con Copilot Studio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 3.1 — Cuándo RAG no es suficiente
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Seminario: RAG y Copilot Studio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-tabs__link">
+          
+  
+  
+  01 Fundamentos RAG
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-tabs__link">
+          
+  
+  
+  02 Origenes Conocimiento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  03 Herramientas y Datos Estructurados
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-tabs__link">
+          
+  
+  
+  04 Evaluación, Seguridad y Gobierno
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../99%20Laboratorios/00%20indice/" class="md-tabs__link">
+          
+  
+  
+  99 Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="RAG con Copilot Studio" class="md-nav__button md-logo" aria-label="RAG con Copilot Studio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAG con Copilot Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seminario: RAG y Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fundamentos RAG
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 Fundamentos RAG
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_1_arquitectura_rag_entorno_empresarial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.1 — Arquitectura RAG en entorno empresarial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_2_proceso_indexacion_documental/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.2 — Proceso de indexación documental
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01%20Fundamentos%20RAG/sesion1_3_embeddings_y_recuperacion_semantica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1.3 — Embeddings y recuperación semántica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Origenes Conocimiento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 Origenes Conocimiento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_1_origenes_soportados_y_tratamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.1 — Orígenes soportados y su tratamiento en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_2_diferencias_operativas_clave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.2 — Diferencias operativas clave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02%20Origenes%20Conocimiento/sesion2_3_factores_calidad_recuperacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SESIÓN 2.3 — Factores que influyen en la calidad del sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Herramientas y Datos Estructurados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Herramientas y Datos Estructurados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.1 — Cuándo RAG no es suficiente
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.1 — Cuándo RAG no es suficiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-resultados-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Resultados de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-recordatorio-que-hace-bien-rag-y-que-no" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Recordatorio: qué hace bien RAG (y qué no)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Recordatorio: qué hace bien RAG (y qué no)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-rag-es-excelente-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 RAG es excelente cuando…
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-rag-se-degrada-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 RAG se degrada cuando…
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-situacion-1-informacion-dinamica-o-en-tiempo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Situación 1 — Información dinámica o en tiempo real
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Situación 1 — Información dinámica o en tiempo real">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-que-significa-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Qué significa “dinámica”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-por-que-rag-falla-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Por qué RAG falla aquí
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Patrón recomendado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-situacion-2-datos-transaccionales-operaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Situación 2 — Datos transaccionales (operaciones)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Situación 2 — Datos transaccionales (operaciones)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-que-es-transaccional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Qué es “transaccional”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-por-que-rag-no-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Por qué RAG no basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Patrón recomendado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-situacion-3-consultas-altamente-estructuradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Situación 3 — Consultas altamente estructuradas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Situación 3 — Consultas altamente estructuradas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-senales-tipicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Señales típicas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-por-que-rag-falla-o-es-caro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Por qué RAG falla o es caro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-situacion-4-informacion-personalizada-por-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Situación 4 — Información personalizada por usuario
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6) Situación 4 — Información personalizada por usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-que-incluye" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Qué incluye
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-por-que-rag-no-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Por qué RAG no basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-antipatrones-lo-que-sale-mal-si-fuerzas-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) Antipatrones: lo que sale mal si fuerzas RAG
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7) Antipatrones: lo que sale mal si fuerzas RAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-rag-como-sistema-de-verdad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 “RAG como sistema de verdad”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-copiar-y-pegar-datos-dump-de-tablas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 “Copiar y pegar datos” (dump de tablas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-simular-una-accion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 “Simular una acción”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-hacer-rag-con-datos-que-deberian-ser-estructurados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 “Hacer RAG con datos que deberían ser estructurados”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-matriz-de-decision-rag-vs-tool-vs-data-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Matriz de decisión: RAG vs Tool vs Data agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8) Matriz de decisión: RAG vs Tool vs Data agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-criterios-practicos-para-decidir-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Criterios prácticos (para decidir rápido)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-regla-de-oro-operativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Regla de oro (operativa)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-miniactividad-5-min-clasificar-preguntas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9) Mini‑actividad (5 min): clasificar preguntas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9) Mini‑actividad (5 min): clasificar preguntas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuestas-esperadas-para-el-instructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuestas esperadas (para el instructor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-cierre-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10) Cierre del bloque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-oficiales-lectura-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias oficiales (lectura opcional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion3_2_uso_herramientas_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.2 — Uso de herramientas en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion3_3_datos_estructurados_y_agente_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3.3 — Datos estructurados y “agentes de datos”
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 Evaluación, Seguridad y Gobierno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_1_evaluacion_calidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.1 — Evaluación de calidad en sistemas RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_2_evaluacion_en_copilot_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.2 — Evaluación en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_3_seguridad_y_gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.3 — Seguridad y control empresarial en un sistema RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04%20Evaluaci%C3%B3n%2C%20Seguridad%20y%20Gobierno/sesion4_4_citaciones_y_trazabilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4.4 — Citaciones y trazabilidad en RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Laboratorios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Laboratorios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/00%20indice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso FraSoHome — Laboratorios (Copilot Studio + RAG + Dataverse)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB2_Base_de_conocimiento_RAG_en_Copilot_Studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 2 — Base de conocimiento (RAG) en Copilot Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB3_Prompting_Citaciones_y_Control_de_Fallback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 3 — Prompting, citaciones y seguridad (control de versionado + prompt injection)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB4_Dataverse_y_Datos_Estructurados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 4 — Dataverse: crear tablas e importar datos estructurados (CSV)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB5_Arquitectura_Hibrida_Tools_y_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 5 — Arquitectura híbrida: Tools (Dataverse) + RAG (documentos)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../99%20Laboratorios/LAB6_Evaluacion_Seguridad_y_Gobierno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LAB 6 — Evaluación, seguridad y gobierno del asistente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-resultados-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Resultados de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-recordatorio-que-hace-bien-rag-y-que-no" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Recordatorio: qué hace bien RAG (y qué no)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) Recordatorio: qué hace bien RAG (y qué no)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-rag-es-excelente-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 RAG es excelente cuando…
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-rag-se-degrada-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 RAG se degrada cuando…
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-situacion-1-informacion-dinamica-o-en-tiempo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Situación 1 — Información dinámica o en tiempo real
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Situación 1 — Información dinámica o en tiempo real">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-que-significa-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Qué significa “dinámica”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-por-que-rag-falla-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Por qué RAG falla aquí
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Patrón recomendado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-situacion-2-datos-transaccionales-operaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Situación 2 — Datos transaccionales (operaciones)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Situación 2 — Datos transaccionales (operaciones)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-que-es-transaccional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Qué es “transaccional”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-por-que-rag-no-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Por qué RAG no basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Patrón recomendado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-situacion-3-consultas-altamente-estructuradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Situación 3 — Consultas altamente estructuradas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) Situación 3 — Consultas altamente estructuradas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-senales-tipicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Señales típicas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-por-que-rag-falla-o-es-caro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Por qué RAG falla o es caro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-situacion-4-informacion-personalizada-por-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Situación 4 — Información personalizada por usuario
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6) Situación 4 — Información personalizada por usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-que-incluye" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Qué incluye
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-por-que-rag-no-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Por qué RAG no basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-patron-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Patrón recomendado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-antipatrones-lo-que-sale-mal-si-fuerzas-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) Antipatrones: lo que sale mal si fuerzas RAG
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7) Antipatrones: lo que sale mal si fuerzas RAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-rag-como-sistema-de-verdad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 “RAG como sistema de verdad”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-copiar-y-pegar-datos-dump-de-tablas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 “Copiar y pegar datos” (dump de tablas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-simular-una-accion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 “Simular una acción”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-hacer-rag-con-datos-que-deberian-ser-estructurados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 “Hacer RAG con datos que deberían ser estructurados”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-matriz-de-decision-rag-vs-tool-vs-data-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Matriz de decisión: RAG vs Tool vs Data agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8) Matriz de decisión: RAG vs Tool vs Data agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-criterios-practicos-para-decidir-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Criterios prácticos (para decidir rápido)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-regla-de-oro-operativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Regla de oro (operativa)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-miniactividad-5-min-clasificar-preguntas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9) Mini‑actividad (5 min): clasificar preguntas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9) Mini‑actividad (5 min): clasificar preguntas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuestas-esperadas-para-el-instructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuestas esperadas (para el instructor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-cierre-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10) Cierre del bloque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-oficiales-lectura-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias oficiales (lectura opcional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Seminario: RAG y Copilot Studio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    03 Herramientas y Datos Estructurados
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sesion-31-cuando-rag-no-es-suficiente">Sesión 3.1 — Cuándo RAG no es suficiente<a class="headerlink" href="#sesion-31-cuando-rag-no-es-suficiente" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Módulo</strong>: SESIÓN 3 — <em>Arquitectura híbrida: RAG, herramientas y breve introducción a datos estructurados</em><br />
+<strong>Bloque</strong>: 3.1 Cuándo RAG no es suficiente<br />
+<strong>Propósito</strong>: que el alumnado sea capaz de <strong>detectar</strong> cuándo la respuesta no debe basarse solo en recuperación documental (RAG) y cuándo conviene un enfoque con <strong>herramientas</strong> (acciones) y/o <strong>datos estructurados</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="1-resultados-de-aprendizaje">1) Resultados de aprendizaje<a class="headerlink" href="#1-resultados-de-aprendizaje" title="Permanent link">&para;</a></h2>
+<p>Al finalizar este bloque, la persona participante podrá:</p>
+<ol>
+<li>Identificar señales de que un caso de uso requiere <strong>datos dinámicos</strong> o <strong>transaccionales</strong> y, por tanto, RAG es insuficiente.</li>
+<li>Distinguir entre preguntas de <strong>conocimiento</strong> (documental) y preguntas de <strong>estado</strong> (sistemas vivos).</li>
+<li>Reconocer cuándo una consulta es <strong>altamente estructurada</strong> y conviene un acceso a datos (SQL/Dataverse/API) en lugar de RAG.</li>
+<li>Diseñar una decisión rápida “RAG vs Tool vs Data” con criterios de precisión, latencia, seguridad y coste.</li>
+</ol>
+<hr />
+<h2 id="2-recordatorio-que-hace-bien-rag-y-que-no">2) Recordatorio: qué hace bien RAG (y qué no)<a class="headerlink" href="#2-recordatorio-que-hace-bien-rag-y-que-no" title="Permanent link">&para;</a></h2>
+<h3 id="21-rag-es-excelente-cuando">2.1 RAG es excelente cuando…<a class="headerlink" href="#21-rag-es-excelente-cuando" title="Permanent link">&para;</a></h3>
+<ul>
+<li>La información está en <strong>documentos</strong> relativamente estables (políticas, manuales, procedimientos).</li>
+<li>La respuesta necesita <strong>síntesis</strong> (explicar, resumir, comparar) a partir de contenido disponible.</li>
+<li>Queremos <strong>citaciones</strong> y trazabilidad de la fuente.</li>
+</ul>
+<h3 id="22-rag-se-degrada-cuando">2.2 RAG se degrada cuando…<a class="headerlink" href="#22-rag-se-degrada-cuando" title="Permanent link">&para;</a></h3>
+<ul>
+<li>La información cambia continuamente (tiempo real).</li>
+<li>La respuesta requiere <strong>exactitud de campo</strong> (valores exactos: estado, saldo, inventario).</li>
+<li>Se necesita <strong>personalización por usuario</strong> basada en identidad/rol/datos transaccionales.</li>
+<li>La consulta exige operaciones sobre datos (filtrar, ordenar, agrupar, “top N”, etc.) con garantías.</li>
+</ul>
+<blockquote>
+<p><strong>Regla práctica</strong>:<br />
+Si la pregunta implica <em>“¿qué pasa ahora mismo?”</em>, <em>“¿cuál es mi…?”</em> o <em>“hazme…”</em> → sospecha que necesitas herramienta/datos.</p>
+</blockquote>
+<hr />
+<h2 id="3-situacion-1-informacion-dinamica-o-en-tiempo-real">3) Situación 1 — Información dinámica o en tiempo real<a class="headerlink" href="#3-situacion-1-informacion-dinamica-o-en-tiempo-real" title="Permanent link">&para;</a></h2>
+<h3 id="31-que-significa-dinamica">3.1 Qué significa “dinámica”<a class="headerlink" href="#31-que-significa-dinamica" title="Permanent link">&para;</a></h3>
+<p>Datos que cambian en intervalos cortos:
+- disponibilidad de sistemas, incidentes activos,
+- precios, stock,
+- estado de un envío,
+- KPI del día, métricas en tiempo real,
+- calendarios y agenda,
+- estado meteorológico (ejemplo didáctico).</p>
+<h3 id="32-por-que-rag-falla-aqui">3.2 Por qué RAG falla aquí<a class="headerlink" href="#32-por-que-rag-falla-aqui" title="Permanent link">&para;</a></h3>
+<ul>
+<li>RAG depende de un índice: aunque lo reindexaras, nunca será tan inmediato como el sistema fuente.</li>
+<li>La “verdad” está en el <strong>sistema</strong>, no en un documento.</li>
+</ul>
+<h3 id="33-patron-recomendado">3.3 Patrón recomendado<a class="headerlink" href="#33-patron-recomendado" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tool‑first</strong>: llamar una herramienta/API que devuelva el dato actual y luego generar una respuesta explicativa.</li>
+</ul>
+<h4 id="ejemplo">Ejemplo<a class="headerlink" href="#ejemplo" title="Permanent link">&para;</a></h4>
+<p>Usuario: “¿Está el servicio X caído ahora?”<br />
+- <strong>Tool</strong>: consulta a monitorización / status page interna<br />
+- <strong>LLM</strong>: “Ahora mismo hay un incidente P2 abierto desde las 09:12; impacto…; próximos pasos…”</p>
+<hr />
+<h2 id="4-situacion-2-datos-transaccionales-operaciones">4) Situación 2 — Datos transaccionales (operaciones)<a class="headerlink" href="#4-situacion-2-datos-transaccionales-operaciones" title="Permanent link">&para;</a></h2>
+<h3 id="41-que-es-transaccional">4.1 Qué es “transaccional”<a class="headerlink" href="#41-que-es-transaccional" title="Permanent link">&para;</a></h3>
+<p>Acciones que crean o modifican estado:
+- crear un ticket,
+- aprobar una solicitud,
+- registrar una compra,
+- actualizar un pedido,
+- cambiar una dirección,
+- bloquear una tarjeta (ejemplo conceptual).</p>
+<h3 id="42-por-que-rag-no-basta">4.2 Por qué RAG no basta<a class="headerlink" href="#42-por-que-rag-no-basta" title="Permanent link">&para;</a></h3>
+<p>RAG <strong>no ejecuta</strong> acciones; solo recupera texto y redacta.
+Si intentas simular la transacción con texto:
+- el usuario cree que “se hizo” cuando no se hizo (riesgo operativo),
+- no hay auditoría ni confirmación,
+- no hay idempotencia ni control de errores.</p>
+<h3 id="43-patron-recomendado">4.3 Patrón recomendado<a class="headerlink" href="#43-patron-recomendado" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>RAG + Tool</strong>:</li>
+<li>RAG para explicar el proceso/política (“qué hay que hacer”),</li>
+<li>Tool para <strong>hacerlo</strong> (crear registro, iniciar flujo),</li>
+<li>LLM para confirmar y contextualizar (“creado ticket INC‑…”, “siguiente paso…”).</li>
+</ul>
+<h4 id="ejemplo_1">Ejemplo<a class="headerlink" href="#ejemplo_1" title="Permanent link">&para;</a></h4>
+<p>Usuario: “Crea una solicitud de vacaciones del 10 al 14 de marzo.”<br />
+- <strong>Tool</strong>: crear solicitud en HRIS / Dataverse<br />
+- <strong>LLM</strong>: resume, confirma, advierte políticas (y cita) + devuelve ID.</p>
+<hr />
+<h2 id="5-situacion-3-consultas-altamente-estructuradas">5) Situación 3 — Consultas altamente estructuradas<a class="headerlink" href="#5-situacion-3-consultas-altamente-estructuradas" title="Permanent link">&para;</a></h2>
+<h3 id="51-senales-tipicas">5.1 Señales típicas<a class="headerlink" href="#51-senales-tipicas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>el usuario pide “lista”, “top”, “filtra por”, “agrupa por”</li>
+<li>consultas con campos:</li>
+<li>“Dame los clientes de Barcelona con facturación &gt; 50k”</li>
+<li>“Incidencias abiertas por prioridad y equipo”</li>
+<li>requiere exactitud en columnas, no “aproximación semántica”.</li>
+</ul>
+<h3 id="52-por-que-rag-falla-o-es-caro">5.2 Por qué RAG falla o es caro<a class="headerlink" href="#52-por-que-rag-falla-o-es-caro" title="Permanent link">&para;</a></h3>
+<ul>
+<li>RAG recupera texto, no es un motor de consulta relacional.</li>
+<li>Meter miles de filas en el contexto es:</li>
+<li>caro (tokens),</li>
+<li>lento,</li>
+<li>arriesgado (exposición de datos),</li>
+<li>y difícil de verificar.</li>
+</ul>
+<h3 id="53-patron-recomendado">5.3 Patrón recomendado<a class="headerlink" href="#53-patron-recomendado" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Data‑first</strong> con una herramienta que haga la consulta:</li>
+<li>Dataverse “Search rows/List rows” (con límites),</li>
+<li>SQL / API,</li>
+<li>servicio analítico.</li>
+</ul>
+<p>Y después:
+- el LLM explica resultados y propone acciones.</p>
+<hr />
+<h2 id="6-situacion-4-informacion-personalizada-por-usuario">6) Situación 4 — Información personalizada por usuario<a class="headerlink" href="#6-situacion-4-informacion-personalizada-por-usuario" title="Permanent link">&para;</a></h2>
+<h3 id="61-que-incluye">6.1 Qué incluye<a class="headerlink" href="#61-que-incluye" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Cuántos días de vacaciones me quedan?”</li>
+<li>“¿Cuál es mi número de empleado?”</li>
+<li>“¿Qué pedidos tengo pendientes?”</li>
+<li>“¿Cuál es el estado de mi ticket?”</li>
+</ul>
+<h3 id="62-por-que-rag-no-basta">6.2 Por qué RAG no basta<a class="headerlink" href="#62-por-que-rag-no-basta" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Un documento puede describir la regla (“cómo se calcula”), pero el valor depende del <strong>usuario</strong> y del <strong>momento</strong>.</li>
+<li>Requiere identidad, permisos, y acceso a datos por usuario.</li>
+</ul>
+<h3 id="63-patron-recomendado">6.3 Patrón recomendado<a class="headerlink" href="#63-patron-recomendado" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>RAG + Tool + reglas de autorización</strong></li>
+<li>Tool obtiene datos del usuario autenticado (claims/Entra ID),</li>
+<li>RAG aporta explicación (política y procedimiento) con citaciones,</li>
+<li>respuesta final combina ambos.</li>
+</ul>
+<blockquote>
+<p><strong>Nota de gobierno</strong>: en enterprise, “personalización” implica casi siempre <strong>control de acceso</strong> (row‑level security) y auditoría.</p>
+</blockquote>
+<hr />
+<h2 id="7-antipatrones-lo-que-sale-mal-si-fuerzas-rag">7) Antipatrones: lo que sale mal si fuerzas RAG<a class="headerlink" href="#7-antipatrones-lo-que-sale-mal-si-fuerzas-rag" title="Permanent link">&para;</a></h2>
+<h3 id="71-rag-como-sistema-de-verdad">7.1 “RAG como sistema de verdad”<a class="headerlink" href="#71-rag-como-sistema-de-verdad" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“El bot dice que…” se convierte en fuente de verdad.</li>
+<li>Si el índice está desactualizado → decisiones incorrectas.</li>
+</ul>
+<h3 id="72-copiar-y-pegar-datos-dump-de-tablas">7.2 “Copiar y pegar datos” (dump de tablas)<a class="headerlink" href="#72-copiar-y-pegar-datos-dump-de-tablas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>costos altos y respuestas poco fiables,</li>
+<li>exposición de información no necesaria,</li>
+<li>problemas de privacidad.</li>
+</ul>
+<h3 id="73-simular-una-accion">7.3 “Simular una acción”<a class="headerlink" href="#73-simular-una-accion" title="Permanent link">&para;</a></h3>
+<ul>
+<li>el bot “promete” que hizo algo sin confirmación real.</li>
+<li>genera tickets falsos o expectativas incorrectas.</li>
+</ul>
+<h3 id="74-hacer-rag-con-datos-que-deberian-ser-estructurados">7.4 “Hacer RAG con datos que deberían ser estructurados”<a class="headerlink" href="#74-hacer-rag-con-datos-que-deberian-ser-estructurados" title="Permanent link">&para;</a></h3>
+<ul>
+<li>p. ej. facturas o CRM como PDF indexado: posible, pero suele ser peor que consultar campos.</li>
+</ul>
+<hr />
+<h2 id="8-matriz-de-decision-rag-vs-tool-vs-data-agent">8) Matriz de decisión: RAG vs Tool vs Data agent<a class="headerlink" href="#8-matriz-de-decision-rag-vs-tool-vs-data-agent" title="Permanent link">&para;</a></h2>
+<h3 id="81-criterios-practicos-para-decidir-rapido">8.1 Criterios prácticos (para decidir rápido)<a class="headerlink" href="#81-criterios-practicos-para-decidir-rapido" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>RAG (documental)</th>
+<th>Tool (acción / API)</th>
+<th>Datos estructurados (consulta)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Verdad vigente”</td>
+<td>Media (depende de indexación)</td>
+<td>Alta (fuente viva)</td>
+<td>Alta (fuente viva)</td>
+</tr>
+<tr>
+<td>Personalización por usuario</td>
+<td>Limitada</td>
+<td>Alta (si hay auth)</td>
+<td>Alta (si hay RLS)</td>
+</tr>
+<tr>
+<td>Consultas “top/filter/group”</td>
+<td>Débil</td>
+<td>Media</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td>Citaciones</td>
+<td>Alta</td>
+<td>Baja (no hay doc)</td>
+<td>Baja/Media (depende de trazabilidad)</td>
+</tr>
+<tr>
+<td>Riesgo de alucinación</td>
+<td>Medio</td>
+<td>Bajo (si el output es correcto)</td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>Coste por consulta</td>
+<td>Medio</td>
+<td>Medio/alto (depende)</td>
+<td>Medio</td>
+</tr>
+<tr>
+<td>Time‑to‑value</td>
+<td>Alto</td>
+<td>Medio</td>
+<td>Medio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-regla-de-oro-operativa">8.2 Regla de oro (operativa)<a class="headerlink" href="#82-regla-de-oro-operativa" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Si la pregunta busca <strong>norma/procedimiento</strong> → RAG.</li>
+<li>Si busca <strong>estado actual</strong> → Tool / Data.</li>
+<li>Si busca <strong>operar</strong> → Tool.</li>
+<li>Si busca <strong>consulta precisa</strong> sobre registros → Data.</li>
+</ul>
+<hr />
+<h2 id="9-miniactividad-5-min-clasificar-preguntas">9) Mini‑actividad (5 min): clasificar preguntas<a class="headerlink" href="#9-miniactividad-5-min-clasificar-preguntas" title="Permanent link">&para;</a></h2>
+<p>Clasifica cada pregunta como:
+- <strong>RAG</strong>
+- <strong>Tool</strong>
+- <strong>Datos estructurados</strong>
+- <strong>Híbrido</strong> (RAG + Tool/Data)</p>
+<ol>
+<li>“¿Cuál es la política de gastos de viaje?”  </li>
+<li>“¿Cuánto llevo gastado este mes en dietas?”  </li>
+<li>“Crea una incidencia por fallo de VPN.”  </li>
+<li>“¿Qué significa severidad P1?”  </li>
+<li>“Dame los 10 tickets abiertos más antiguos del equipo X.”  </li>
+<li>“¿Puedo trasladar vacaciones al año siguiente?”  </li>
+<li>“¿Cuál es el estado de mi ticket INC‑1234?”  </li>
+<li>“¿Qué proveedores están bloqueados y por qué?”</li>
+</ol>
+<h3 id="respuestas-esperadas-para-el-instructor">Respuestas esperadas (para el instructor)<a class="headerlink" href="#respuestas-esperadas-para-el-instructor" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1 RAG</li>
+<li>2 Datos/Tool (depende del sistema)</li>
+<li>3 Tool</li>
+<li>4 RAG</li>
+<li>5 Datos estructurados (consulta)</li>
+<li>6 RAG</li>
+<li>7 Tool/Datos (consulta por ID)</li>
+<li>8 Híbrido (datos + explicación/política)</li>
+</ul>
+<hr />
+<h2 id="10-cierre-del-bloque">10) Cierre del bloque<a class="headerlink" href="#10-cierre-del-bloque" title="Permanent link">&para;</a></h2>
+<p>Mensaje clave:</p>
+<blockquote>
+<p>Un buen asistente empresarial no elige “solo RAG” o “solo herramientas”.<br />
+Diseña una <strong>arquitectura híbrida</strong> que combine recuperación documental para contexto y herramientas/datos para exactitud y acciones.</p>
+</blockquote>
+<hr />
+<h2 id="referencias-oficiales-lectura-opcional">Referencias oficiales (lectura opcional)<a class="headerlink" href="#referencias-oficiales-lectura-opcional" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Copilot Studio — Guía de RAG (patrones, grounding, comportamiento general):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/retrieval-augmented-generation
+
+Copilot Studio — Guía general (incluye integración y herramientas):
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.path", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
