@@ -14,7 +14,7 @@ El objetivo del taller es construir un **asistente en Copilot Studio** con enfoq
 - **Tools / acciones (Dataverse)** para preguntas “métricas” (ventas, devoluciones, stock) que requieren cálculos o consulta a datos estructurados.
 - **Respuesta con evidencia**: citaciones para lo documental y trazabilidad de la consulta para lo métrico.
 
-> Nota: Estos laboratorios empiezan en **LAB 2** (LAB 1 se omite intencionalmente).
+> Nota: Estos laboratorios empiezan en **LAB 2** .
 
 ## Qué construirás al final
 
@@ -50,3 +50,4 @@ Este repo de markdown asume que tienes disponible el pack del caso con estas car
 - `Datos_Estructurados/` (CSV)
 - `TestSets/` (CSV)
 
+Los tienes disponibles aquí : [Recursos](materiales)
