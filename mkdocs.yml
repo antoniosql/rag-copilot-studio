@@ -7,6 +7,7 @@ theme:
     - navigation.expand
     - navigation.sections
     - navigation.tabs
+    - navigation.path
     - search.highlight
     - search.suggest
 markdown_extensions:

@@ -85,5 +85,3 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 5. **Cierra con evaluación y gobierno**: [4.1 Evaluación](sesion4_1_evaluacion_calidad.md) + [4.3 Seguridad](sesion4_3_seguridad_y_gobierno.md) + [4.4 Trazabilidad](sesion4_4_citaciones_y_trazabilidad.md)
 
 ---
-
-# test
