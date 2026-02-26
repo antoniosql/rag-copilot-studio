@@ -1,0 +1,8 @@
+site_name: My Docs
+nav:
+  - Inicio: index.md
+  - "Sesión 1":
+      - "1.1 Arquitectura RAG": sesion1_1_arquitectura_rag_entorno_empresarial.md
+      - "1.2 Proceso de indexación": sesion1_2_proceso_indexacion_documental.md
+  - "Sesión 2":
+      - "2.1 Orígenes soportados": sesion2_1_origenes_soportados_y_tratamiento.md
