@@ -33,8 +33,8 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 -   ## Sesión 1 — Fundamentos operativos de RAG  
     Arquitectura, indexación, embeddings y primera práctica en Copilot Studio.
 
-    [Abrir Sesión 1 (recomendado)](sesion1_1_arquitectura_rag_entorno_empresarial.md){ .md-button .md-button--primary }
-    [Ir a la práctica 1.4](sesion1_4_practica_copilot_studio.md){ .md-button }
+    [Abrir Sesión 1 (recomendado)](sesion1_1_arquitectura_rag_entorno_empresarial.md)
+    [Ir a la práctica 1.4](sesion1_4_practica_copilot_studio.md)
 
     **Bloques**
     - [1.1 Arquitectura RAG en entorno empresarial](sesion1_1_arquitectura_rag_entorno_empresarial.md)
@@ -45,8 +45,8 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 -   ## Sesión 2 — Orígenes de conocimiento y calidad de recuperación  
     Qué fuentes soporta Copilot Studio, cómo se “tratan” internamente y cómo mejorar la calidad de recuperación.
 
-    [Abrir Sesión 2](sesion2_1_origenes_soportados_y_tratamiento.md){ .md-button .md-button--primary }
-    [Ir a la práctica 2.4](sesion2_4_practica_aplicada.md){ .md-button }
+    [Abrir Sesión 2](sesion2_1_origenes_soportados_y_tratamiento.md)
+    [Ir a la práctica 2.4](sesion2_4_practica_aplicada.md)
 
     **Bloques**
     - [2.1 Orígenes soportados y su tratamiento](sesion2_1_origenes_soportados_y_tratamiento.md)
@@ -57,8 +57,8 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 -   ## Sesión 3 — Arquitectura híbrida: RAG + herramientas + datos  
     Cómo decidir cuándo usar RAG, cuándo usar herramientas (acciones) y cómo encaja el dato estructurado.
 
-    [Abrir Sesión 3](sesion3_1_cuando_rag_no_es_suficiente.md){ .md-button .md-button--primary }
-    [Ir al ejercicio 3.4](sesion3_4_ejercicio_practico_hibrido.md){ .md-button }
+    [Abrir Sesión 3](sesion3_1_cuando_rag_no_es_suficiente.md)
+    [Ir al ejercicio 3.4](sesion3_4_ejercicio_practico_hibrido.md)
 
     **Bloques**
     - [3.1 Cuándo RAG no es suficiente](sesion3_1_cuando_rag_no_es_suficiente.md)
@@ -69,8 +69,8 @@ Aquí encontrarás los **apuntes y prácticas** del seminario, organizados por s
 -   ## Sesión 4 — Evaluación, seguridad y gobierno  
     Medición repetible, evaluación en Copilot Studio, controles de seguridad y trazabilidad.
 
-    [Abrir Sesión 4](sesion4_1_evaluacion_calidad.md){ .md-button .md-button--primary }
-    [Ir a citaciones y trazabilidad (4.4)](sesion4_4_citaciones_y_trazabilidad.md){ .md-button }
+    [Abrir Sesión 4](sesion4_1_evaluacion_calidad.md)
+    [Ir a citaciones y trazabilidad (4.4)](sesion4_4_citaciones_y_trazabilidad.md)
 
     **Bloques**
     - [4.1 Evaluación de calidad en sistemas RAG](sesion4_1_evaluacion_calidad.md)
