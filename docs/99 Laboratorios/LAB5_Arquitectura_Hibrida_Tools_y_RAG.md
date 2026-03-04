@@ -17,11 +17,12 @@ Objetivo: habilitar al agente para responder preguntas métricas (datos estructu
 
 ### Tablas Dataverse que DEBEN existir:
 
+Las cargadas desde los CSV de esta lista (revisar el nombre concreto con el que se ha generado cada una de las tablas al importarlas)
+
 - FS Ventas Resumen Diario
 
 - FS Devoluciones
 
-- FS Alertas Stockout
 
 ### Preguntas que vas a probar al final (ya te las damos aquí)
 
@@ -63,9 +64,11 @@ OJO los nombres de las columnas que especificamos en la descripción, deben de s
 | --- | --- | --- |
 | DV_ListSalesSummary | Store Sales Record | Filas con Date, Channel, StoreID, NetSalesEUR, Orders (para sumar ventas). |
 | DV_ListReturns | Return | Filas con ReturnDate, Channel, StoreID, RefundAmountEUR, ReasonCode, Approved, ReturnID (para contar/sumar devoluciones). |
-| DV_ListStockoutAlerts (opcional) | Stock Alert | AlertDate, StoreID, SKU, Severity, Priority, SuggestedAction (para alertas). |
+
+Si intentamos utilizar las herramientas sin más, tal y como están configuradas, lo más probable es que obtengamos un error de que la solicitud genera demasiados datos, dependiendo del número de filas. Tened en cuenta que en este ejemplo no hemos definido ningún filtro en las llamadas a las herramientas, por lo que devolverán todas las filas. 
 
 ### 2) Crear el topic 'Consultas métricas' (recoge parámetros y decide qué Tool usar)
+Habría varias formas de resolver este caso de uso. En este escenario se crean dos herramientas, que se utilizan desde un tema, seleccionando en el tema la herramienta a utilizar, para determinar las posibilidades. Podrían generarse, con filtros que se rellenasen automáticamente por parte del Agente, y "fiar" el funcionamiento al criterio del agente. El método a elegir es una decisión de Arquitectura, que depende mucho del escenario concreto a resolver. 
 
 - Ve a Topics (Temas).
 
@@ -73,59 +76,50 @@ OJO los nombres de las columnas que especificamos en la descripción, deben de s
 
 - Nombre: Consultas métricas.
 
-- Añade triggers (frases) como: 'ventas netas', 'tasa de devolución', 'devoluciones online', 'stockout', 'alertas de stock'.
+- Añade triggers (frases) como: 'ventas netas', 'tasa de devolución', 'devoluciones online'.
 
-- En el lienzo del topic, añade un nodo Question para preguntar: “¿Qué métrica necesitas?” con opciones: (A) Ventas netas, (B) Tasa de devolución (importe), (C) Alertas stockout.
+- En el lienzo del topic, añade un nodo Question para preguntar: “¿Qué métrica necesitas?” con opciones: (A) Ventas netas, (B) Tasa de devolución (importe) 
 
-- Guarda la opción elegida en una variable: Topic.Metrica.
+- Guarda la opción elegida en una variable: Metrica.
+- Verás que se crean un montón de ramas de condición para cada una de las opciones que hayamos configurado. Las configuraremos / eliminaremos después
 
 - Añade 4 nodos Question para capturar parámetros:
 
-- Fecha inicio → Topic.FechaInicio (tipo fecha).
+- Fecha inicio → FechaInicio (tipo fecha).
 
-- Fecha fin → Topic.FechaFin (tipo fecha).
+- Fecha fin → FechaFin (tipo fecha).
 
-- Canal → Topic.Canal (opciones: Online, Tienda, Ambos).
+- Canal → Canal (opciones: Online, Tienda, Ambos).
 
-- Tienda → Topic.Tienda (opciones: MAD01, BCN01, VLC01, ONLINE, Todas).
+- Tienda → Tienda (opciones: MAD01, BCN01, VLC01, ONLINE, Todas).
 
 - Consejo: si el usuario elige Canal=Online, normalmente Tienda=ONLINE. Si elige Canal=Tienda, Tienda puede ser una tienda física o Todas.
 
 ### 3) Rama A — Ventas netas (Tool + cálculo con Power Fx)
 
-- Debajo del bloque de preguntas, añade un nodo Condition (Condición): si Topic.Metrica = 'Ventas netas'.
+- Debajo del bloque de preguntas, busca el nodo Condition (Condición): si Metrica = 'Ventas netas'.
 
 - Dentro de la rama, añade un nodo para llamar al Tool DV_ListSalesSummary.
 
-- Guarda la salida del Tool en una variable tipo tabla (por ejemplo Topic.SalesRows).
+- Guarda la salida del Tool en una variable tipo tabla (por ejemplo SalesRows).
 
-- Añade un nodo Set a variable value (Establecer variable) para filtrar filas con Power Fx (ejemplo abajo). Guarda el resultado en Topic.SalesFiltradas.
+- Añade un nodo Set a variable value (Establecer variable) para filtrar filas con Power Fx (ejemplo abajo). Guarda el resultado en SalesFiltradas.
 
-- Añade otro Set a variable value para calcular NetSalesTotal = Sum(Topic.SalesFiltradas, NetSalesEUR).
-
-- Añade otro Set a variable value para calcular OrdersTotal = Sum(Topic.SalesFiltradas, Orders).
+- Añade otro Set a variable value para calcular NetSalesTotal = Sum(Topic.SalesFiltradas, as_netsaleseur).
 
 - Añade un nodo Message para responder con el total y con el contexto (periodo/canal/tienda).
 
 #### Power Fx (copiar y pegar) — Filtrado y suma
 
-Nota: si tus columnas tienen prefijos (por el schema de Dataverse), usa los nombres exactos que te aparecen en el output del Tool.
+Nota: si tus columnas tienen prefijos (por el schema de Dataverse), usa los nombres exactos que te aparecen en el output del Tool.Busca esos nombres en las tablas dentro de la página de PowerPlatform. Por ejemplo StoreID puede aparecer como as_storeidentifier, por ejemplo. 
 
 ```text
 // Filtrar ventas por fechas, canal y tienda
-Filter(
-    Topic.SalesRows,
-    Date >= Topic.FechaInicio &&
-    Date <= Topic.FechaFin &&
-    (Topic.Canal = "Ambos" || Channel = Topic.Canal) &&
-    (Topic.Tienda = "Todas" || StoreID = Topic.Tienda)
-)
+// Filtrar ventas por fechas, canal y tienda
+Filter(Topic.SalesRows,     as_saledate >= Topic.FechaInicio && as_saledate <= Topic.FechaFin &&     (Text(Topic.Canal) = "Ambos" || as_saleschannel = Text(Topic.Canal)) &&     (Text(Topic.Tienda) = "Todas" || as_storeidentifier = Text(Topic.Tienda)))
 ```
 
-```text
-// Sumar ventas netas y pedidos
-Sum(Topic.SalesFiltradas, NetSalesEUR)
-```
+
 
 ### 4) Rama B — Tasa de devolución (Tool + cálculo + definición citada)
 
@@ -144,15 +138,15 @@ Sum(Topic.SalesFiltradas, NetSalesEUR)
 - Responde con: cifra + explicación + citación del diccionario KPI.
 
 #### Power Fx (copiar y pegar) — Devoluciones aprobadas y ratio
-
+RECUERDA REVISAR LOS NOMBRES DE LOS CAMPOS
 ```text
 // Filtrar devoluciones aprobadas por fechas/canal/tienda
 Filter(
     Topic.ReturnRows,
     ReturnDate >= Topic.FechaInicio &&
     ReturnDate <= Topic.FechaFin &&
-    (Topic.Canal = "Ambos" || Channel = Topic.Canal) &&
-    (Topic.Tienda = "Todas" || StoreID = Topic.Tienda) &&
+    (Text(Topic.Canal) = "Ambos" || Channel = Text(Topic.Canal)) &&
+    (Text(Topic.Tienda) = "Todas" || StoreID = Text(Topic.Tienda)) &&
     Approved = "Sí"
 )
 ```
