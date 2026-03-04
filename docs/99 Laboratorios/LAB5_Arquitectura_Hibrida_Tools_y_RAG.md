@@ -55,7 +55,9 @@ Vas a crear herramientas de SOLO LECTURA (List rows) para consultar Dataverse.
 
 #### Crea estas 3 herramientas (repitiendo el proceso):
 REVISA LOS NOMBRES DE LAS TABLAS EN POWERPLATFORM, puede ser diferentes dependiendo de como las hayas creado cuando importaste los csv y dependen también de los idiomas seleccionados. 
-| Nombre sugerido del Tool | Tabla | Qué devuelve / para qué |
+OJO los nombres de las columnas que especificamos en la descripción, deben de ser los nombres internos de las columnas, que podemos ver en PowerPlatform dentro de cada una de las tablas. Suelen tener un prefijo del estilo "as_" donde as es el nombre del Publicador que hayamos para nuestra solución
+
+| Nombre sugerido del Tool | Tabla | Descripción de la Tool |
 | --- | --- | --- |
 | DV_ListSalesSummary | Store Sales Record | Filas con Date, Channel, StoreID, NetSalesEUR, Orders (para sumar ventas). |
 | DV_ListReturns | Return | Filas con ReturnDate, Channel, StoreID, RefundAmountEUR, ReasonCode, Approved, ReturnID (para contar/sumar devoluciones). |
