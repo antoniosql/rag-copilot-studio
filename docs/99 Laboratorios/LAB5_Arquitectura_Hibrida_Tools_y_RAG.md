@@ -54,12 +54,12 @@ Vas a crear herramientas de SOLO LECTURA (List rows) para consultar Dataverse.
 - Pulsa Submit/Create y luego Add and configure (Agregar y configurar).
 
 #### Crea estas 3 herramientas (repitiendo el proceso):
-
+REVISA LOS NOMBRES DE LAS TABLAS EN POWERPLATFORM, puede ser diferentes dependiendo de como las hayas creado cuando importaste los csv y dependen también de los idiomas seleccionados. 
 | Nombre sugerido del Tool | Tabla | Qué devuelve / para qué |
 | --- | --- | --- |
-| DV_ListSalesSummary | FS Ventas Resumen Diario | Filas con Date, Channel, StoreID, NetSalesEUR, Orders (para sumar ventas). |
-| DV_ListReturns | FS Devoluciones | Filas con ReturnDate, Channel, StoreID, RefundAmountEUR, ReasonCode, Approved, ReturnID (para contar/sumar devoluciones). |
-| DV_ListStockoutAlerts (opcional) | FS Alertas Stockout | AlertDate, StoreID, SKU, Severity, Priority, SuggestedAction (para alertas). |
+| DV_ListSalesSummary | Store Sales Record | Filas con Date, Channel, StoreID, NetSalesEUR, Orders (para sumar ventas). |
+| DV_ListReturns | Return | Filas con ReturnDate, Channel, StoreID, RefundAmountEUR, ReasonCode, Approved, ReturnID (para contar/sumar devoluciones). |
+| DV_ListStockoutAlerts (opcional) | Stock Alert | AlertDate, StoreID, SKU, Severity, Priority, SuggestedAction (para alertas). |
 
 ### 2) Crear el topic 'Consultas métricas' (recoge parámetros y decide qué Tool usar)
 
