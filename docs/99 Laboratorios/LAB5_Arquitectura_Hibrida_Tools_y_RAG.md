@@ -47,7 +47,7 @@ Vas a crear herramientas de SOLO LECTURA (List rows) para consultar Dataverse.
 
 - Busca y selecciona Microsoft Dataverse.
 
-- Selecciona la acción/herramienta: List rows from selected environment (Listar filas del entorno seleccionado).
+- Selecciona la acción/herramienta: List rows from selected environment (Mostrar filas del entorno seleccionado).
 
 - Si te lo pide, selecciona Create new connection (Crear nueva conexión) y autentica tu usuario.
 
